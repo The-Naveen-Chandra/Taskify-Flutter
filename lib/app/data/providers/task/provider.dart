@@ -1,6 +1,4 @@
-
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:taskify/app/core/utils/keys.dart';
 import 'package:taskify/app/data/models/task.dart';
@@ -14,12 +12,11 @@ class TaskProvider {
 //     'color': '#ff123456',
 //     'icon': 0xe123}
 // ]}
-  
 
   List<Task> readTask() {
-    var tasks = <Task> [];
+    var tasks = <Task>[];
     jsonDecode(_storage.read(taskKey).toString())
-      .forEach((task) => tasks.add(Task.fromJson(task)));
+        .forEach((task) => tasks.add(Task.fromJson(task)));
     return tasks;
   }
 
