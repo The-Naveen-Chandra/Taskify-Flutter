@@ -31,12 +31,14 @@ class HomePage extends GetView<HomeController> {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         vertical: 1.0.wp, horizontal: 4.0.wp),
-                    child: Text(
-                      "Tasks",
-                      style: GoogleFonts.poppins(
-                        fontSize: 20.0.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
+                    child: Center(
+                      child: Text(
+                        "Tasks",
+                        style: GoogleFonts.poppins(
+                          fontSize: 16.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[800],
+                        ),
                       ),
                     ),
                   ),
@@ -156,7 +158,7 @@ AppBar _buildAppBar() {
     elevation: 0,
     title: Row(
       children: [
-        Container(
+        SizedBox(
           height: 45,
           width: 45,
           child: ClipRRect(
