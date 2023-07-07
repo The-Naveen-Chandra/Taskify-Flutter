@@ -10,7 +10,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor:Color(0xfafafafa),
+      statusBarColor: Color(0xfafafafa),
       statusBarIconBrightness: Brightness.dark,
     ),
   );
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      title: 'Taskify using Flutter',
+      title: 'Taskify - An AI Powered App',
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
       initialBinding: HomeBinding(),
@@ -34,4 +34,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
