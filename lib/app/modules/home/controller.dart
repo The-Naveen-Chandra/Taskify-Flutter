@@ -1,13 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:taskify/app/data/models/task.dart';
 import 'package:taskify/app/data/services/storage/repository.dart';
 
 class HomeController extends GetxController {
   TaskRepository taskRepository;
-  HomeController ({required this.taskRepository});
+  HomeController({required this.taskRepository});
   final formKey = GlobalKey<FormState>();
   final editCtrl = TextEditingController();
   final tabIndex = 0.obs;
@@ -17,7 +16,6 @@ class HomeController extends GetxController {
   final task = Rx<Task?>(null);
   final doingTodos = <dynamic>[].obs;
   final doneTodos = <dynamic>[].obs;
-
 
   @override
   void onInit() {
@@ -40,11 +38,11 @@ class HomeController extends GetxController {
     chipIndex.value = value;
   }
 
-  void changeDeleting (bool value) {
+  void changeDeleting(bool value) {
     deleting.value = value;
   }
 
-  void changeTask(Task ? select) {
+  void changeTask(Task? select) {
     task.value = select;
   }
 
@@ -52,10 +50,10 @@ class HomeController extends GetxController {
     doingTodos.clear();
     doneTodos.clear();
 
-    for(int i=0; i< select.length; i++) {
+    for (int i = 0; i < select.length; i++) {
       var todo = select[i];
       var status = todo['done'];
-      if(status == true) {
+      if (status == true) {
         doneTodos.add(todo);
       } else {
         doingTodos.add(todo);
@@ -64,7 +62,7 @@ class HomeController extends GetxController {
   }
 
   bool addTask(Task task) {
-    if(tasks.contains(task)) {
+    if (tasks.contains(task)) {
       return false;
     }
     tasks.add(task);
@@ -77,7 +75,7 @@ class HomeController extends GetxController {
 
   updateTask(Task task, String title) {
     var todos = task.todos ?? [];
-    if(containeTodo(todos , title)) {
+    if (containeTodo(todos, title)) {
       return false;
     }
     var todo = {'title': title, 'done': false};
@@ -95,20 +93,23 @@ class HomeController extends GetxController {
 
   bool addTodo(String title) {
     var todo = {'title': title, 'done': false};
-    if(doingTodos.any((element) => mapEquals<String, dynamic>(todo, element))) {
+    if (doingTodos
+        .any((element) => mapEquals<String, dynamic>(todo, element))) {
       return false;
     }
     var doneTodo = {'title': title, 'done': true};
-    if(doneTodos.any((element) => mapEquals<String, dynamic>(doneTodo, element))) {
+    if (doneTodos
+        .any((element) => mapEquals<String, dynamic>(doneTodo, element))) {
       return false;
     }
     doingTodos.add(todo);
     return true;
   }
 
-  void updateTodos () {
+  void updateTodos() {
     var newTodos = <Map<String, dynamic>>[];
-    newTodos.addAll( [
+    newTodos.addAll(
+      [
         ...doingTodos,
         ...doneTodos,
       ],
@@ -122,18 +123,17 @@ class HomeController extends GetxController {
   void doneTodo(String title) {
     var doingTodo = {'title': title, 'done': false};
     int index = doingTodos.indexWhere(
-      (element) => mapEquals<String, dynamic>(doingTodo, element)
-    );
+        (element) => mapEquals<String, dynamic>(doingTodo, element));
     doingTodos.removeAt(index);
-    var doneTodo = {'title': title , 'done': true};
+    var doneTodo = {'title': title, 'done': true};
     doneTodos.add(doneTodo);
     doingTodos.refresh();
     doneTodos.refresh();
   }
 
   void deleteDoneTodo(dynamic doneTodo) {
-    int index = doneTodos.indexWhere((element) => 
-    mapEquals<String,dynamic>(doneTodo, element));
+    int index = doneTodos
+        .indexWhere((element) => mapEquals<String, dynamic>(doneTodo, element));
     doneTodos.removeAt(index);
     doneTodos.refresh();
   }
@@ -144,8 +144,8 @@ class HomeController extends GetxController {
 
   int getDoneTodo(Task task) {
     var res = 0;
-    for(int i = 0; i < task.todos!.length; i++) {
-      if(task.todos![i]['done'] == true) {
+    for (int i = 0; i < task.todos!.length; i++) {
+      if (task.todos![i]['done'] == true) {
         res += 1;
       }
     }
@@ -154,8 +154,8 @@ class HomeController extends GetxController {
 
   int getTotalTask() {
     var res = 0;
-    for(int i = 0; i < tasks.length; i++) {
-      if(tasks[i].todos != null) {
+    for (int i = 0; i < tasks.length; i++) {
+      if (tasks[i].todos != null) {
         res += tasks[i].todos!.length;
       }
     }
@@ -164,10 +164,10 @@ class HomeController extends GetxController {
 
   int getTotalDoneTask() {
     var res = 0;
-    for(int i = 0; i < tasks.length; i++) {
-      if(tasks[i].todos != null) {
-        for(int j = 0; j < tasks[i].todos!.length; j++) {
-          if(tasks[i].todos![j]['done'] == true) {
+    for (int i = 0; i < tasks.length; i++) {
+      if (tasks[i].todos != null) {
+        for (int j = 0; j < tasks[i].todos!.length; j++) {
+          if (tasks[i].todos![j]['done'] == true) {
             res += 1;
           }
         }
