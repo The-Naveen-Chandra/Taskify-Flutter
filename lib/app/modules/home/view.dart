@@ -6,7 +6,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/data/models/task.dart';
 import 'package:taskify/app/modules/home/controller.dart';
-import 'package:taskify/app/modules/home/report/view.dart';
 import 'package:taskify/app/modules/home/widgets/add_card.dart';
 import 'package:taskify/app/modules/home/widgets/add_dialog.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
@@ -17,11 +16,26 @@ import 'package:taskify/app/modules/home/profile/view.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
+  // final PageController pageController = PageController();
+  // int currentPage = 0;
 
   @override
   Widget build(BuildContext context) {
+    // Timer.periodic(const Duration(seconds: 3), (_) {
+    //   if (currentPage < 2) {
+    //     currentPage++;
+    //   } else {
+    //     currentPage = 0;
+    //   }
+    //   pageController.animateToPage(
+    //     currentPage,
+    //     duration: const Duration(milliseconds: 500),
+    //     curve: Curves.ease,
+    //   );
+    // });
     return Scaffold(
       // backgroundColor: Colors.grey[200],
+
       body: Obx(
         () => IndexedStack(
           index: controller.tabIndex.value,
@@ -95,8 +109,11 @@ class HomePage extends GetView<HomeController> {
                   ),
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 5,
-                    // width: 00,
-                    child: ListView.builder(
+                    child: PageView.builder(
+                      // controller: pageController,
+                      // onPageChanged: (int index) {
+                      //   currentPage = 0;
+                      // },
                       scrollDirection: Axis.horizontal,
                       itemCount: 3,
                       itemBuilder: (context, index) => InfoCards(
@@ -160,7 +177,6 @@ class HomePage extends GetView<HomeController> {
                 ],
               ),
             ),
-            // ReportPage(),
             const ProfilePage(),
           ],
         ),
@@ -204,7 +220,16 @@ class HomePage extends GetView<HomeController> {
         ),
         child: Obx(
           () => BottomNavigationBar(
-            onTap: (int index) => controller.changeTabIndex(index),
+            onTap: (int index) {
+              controller.changeTabIndex(index);
+              // if (index == 1) {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => ProfilePage(),
+              //       ));
+              // }
+            },
             currentIndex: controller.tabIndex.value,
             showSelectedLabels: false,
             showUnselectedLabels: false,
