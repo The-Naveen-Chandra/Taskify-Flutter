@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 
 class GoPremium extends StatelessWidget {
   const GoPremium({super.key});
@@ -35,16 +36,42 @@ class GoPremium extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Go Premium!",
+                    // Text(
+                    //   "Go Premium!",
+                    //   style: GoogleFonts.poppins(
+                    //     color: Colors.grey[200],
+                    //     fontWeight: FontWeight.bold,
+                    //     fontSize: 20,
+                    //   ),
+                    // ),
+                    GradientText(
+                      'Go Premium',
                       style: GoogleFonts.poppins(
-                        color: Colors.grey[200],
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
+                          fontSize: 24, fontWeight: FontWeight.w600),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Colors.red,
+                          Colors.pink,
+                          Colors.purple,
+                          Colors.deepPurple,
+                          Colors.deepPurple,
+                          Colors.indigo,
+                          Colors.blue,
+                          Colors.lightBlue,
+                          Colors.cyan,
+                          Colors.teal,
+                          Colors.green,
+                          Colors.lightGreen,
+                          Colors.lime,
+                          Colors.yellow,
+                          Colors.amber,
+                          Colors.orange,
+                          Colors.deepOrange,
+                        ],
                       ),
                     ),
                     const SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     Text(
                       "Get unlimited access\nto all out feature!",

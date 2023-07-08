@@ -5,12 +5,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/data/models/task.dart';
-import 'package:taskify/app/modules/detail/widgets/go_premium.dart';
+import 'package:taskify/app/modules/home/widgets/go_premium.dart';
 import 'package:taskify/app/modules/home/controller.dart';
 import 'package:taskify/app/modules/home/report/view.dart';
 import 'package:taskify/app/modules/home/widgets/add_card.dart';
 import 'package:taskify/app/modules/home/widgets/add_dialog.dart';
+import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 import 'package:taskify/app/modules/home/widgets/task_card.dart';
+import 'package:taskify/app/modules/home/profile/view.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -18,7 +20,6 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
       body: Obx(
         () => IndexedStack(
           index: controller.tabIndex.value,
@@ -27,6 +28,69 @@ class HomePage extends GetView<HomeController> {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 4.0.wp),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 40,
+                              width: 40,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  "assets/images/profile.jpg",
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            // Text(
+                            //   "Hi, Xo !",
+                            //   style: GoogleFonts.poppins(
+                            //     fontSize: 22,
+                            //     fontWeight: FontWeight.w500,
+                            //     color: Colors.black,
+                            //   ),
+                            // ),
+                            GradientText(
+                              'Hello Flutter',
+                              style: GoogleFonts.poppins(
+                                  fontSize: 22, fontWeight: FontWeight.w500),
+                              gradient: LinearGradient(
+                                colors: [
+                                  Colors.blue.shade400,
+                                  Colors.blue.shade900,
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        // AI assistance logo
+                        ShaderMask(
+                          blendMode: BlendMode.srcIn,
+                          shaderCallback: (Rect bounds) => RadialGradient(
+                            center: Alignment.topCenter,
+                            stops: const [.5, 1],
+                            colors: [
+                              Colors.blue.shade400,
+                              Colors.blue.shade900,
+                            ],
+                          ).createShader(bounds),
+                          child: Image.asset(
+                            "assets/images/rocket-lunch.png",
+                            width: 25,
+                            height: 25,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   const GoPremium(),
                   Padding(
                     padding: EdgeInsets.symmetric(
@@ -36,7 +100,7 @@ class HomePage extends GetView<HomeController> {
                         "Tasks",
                         style: GoogleFonts.poppins(
                           fontSize: 16.0.sp,
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w600,
                           color: Colors.grey[800],
                         ),
                       ),
@@ -73,7 +137,8 @@ class HomePage extends GetView<HomeController> {
                 ],
               ),
             ),
-            ReportPage(),
+            // ReportPage(),
+            const ProfilePage(),
           ],
         ),
       ),
@@ -99,6 +164,7 @@ class HomePage extends GetView<HomeController> {
                     ? CupertinoIcons.delete
                     : Icons.add_rounded,
                 size: 40,
+                color: Colors.white,
               ),
             ),
           );
@@ -150,44 +216,4 @@ class HomePage extends GetView<HomeController> {
       ),
     );
   }
-}
-
-AppBar _buildAppBar() {
-  return AppBar(
-    backgroundColor: Colors.white,
-    elevation: 0,
-    title: Row(
-      children: [
-        SizedBox(
-          height: 45,
-          width: 45,
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.asset(
-              "assets/images/profile.jpg",
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
-        Text(
-          "Hi, Xo !",
-          style: GoogleFonts.poppins(
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
-      ],
-    ),
-    actions: const [
-      Icon(
-        Icons.more_vert,
-        size: 40,
-        color: Colors.black,
-      ),
-    ],
-  );
 }

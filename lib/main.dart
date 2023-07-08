@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      theme: ThemeData(useMaterial3: true),
       title: 'Taskify - An AI Powered App',
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
