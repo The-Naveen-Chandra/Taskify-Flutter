@@ -5,12 +5,13 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/data/models/task.dart';
-import 'package:taskify/app/modules/home/widgets/go_premium.dart';
 import 'package:taskify/app/modules/home/controller.dart';
 import 'package:taskify/app/modules/home/report/view.dart';
 import 'package:taskify/app/modules/home/widgets/add_card.dart';
 import 'package:taskify/app/modules/home/widgets/add_dialog.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
+import 'package:taskify/app/modules/home/widgets/info_cards.dart';
+import 'package:taskify/app/modules/home/widgets/info_model.dart';
 import 'package:taskify/app/modules/home/widgets/task_card.dart';
 import 'package:taskify/app/modules/home/profile/view.dart';
 
@@ -20,6 +21,7 @@ class HomePage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Colors.grey[200],
       body: Obx(
         () => IndexedStack(
           index: controller.tabIndex.value,
@@ -91,7 +93,28 @@ class HomePage extends GetView<HomeController> {
                       ],
                     ),
                   ),
-                  const GoPremium(),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 5,
+                    // width: 00,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                      itemBuilder: (context, index) => InfoCards(
+                        title: infoCardsData[index].title,
+                        description: infoCardsData[index].description,
+                        bgColor: infoCardsData[index].bgColor,
+                        descriptionColor: infoCardsData[index].descriptionColor,
+                        isGradientRainbow:
+                            infoCardsData[index].isGradientRainbow,
+                        gradient: infoCardsData[index].gradient,
+                        iconBottomColor: infoCardsData[index].iconBottomColor,
+                        isIcon: infoCardsData[index].isIcon,
+                        icon: infoCardsData[index].icon,
+                        iconBottom: infoCardsData[index].iconBottom,
+                        onTap: infoCardsData[index].onTap,
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         vertical: 1.0.wp, horizontal: 4.0.wp),
@@ -188,25 +211,43 @@ class HomePage extends GetView<HomeController> {
             items: [
               BottomNavigationBarItem(
                 label: 'Home',
-                icon: Padding(
-                  padding: EdgeInsets.only(
-                    right: 8.0.wp,
-                  ),
-                  child: const Icon(
-                    CupertinoIcons.home,
-                    size: 30,
+                icon: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (Rect bounds) => RadialGradient(
+                    center: Alignment.topCenter,
+                    stops: const [.5, 1],
+                    colors: [
+                      Colors.blue.shade400,
+                      Colors.blue.shade900,
+                    ],
+                  ).createShader(bounds),
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 8.0.wp),
+                    child: const Icon(
+                      CupertinoIcons.home,
+                      size: 35,
+                    ),
                   ),
                 ),
               ),
               BottomNavigationBarItem(
                 label: 'Profile',
-                icon: Padding(
-                  padding: EdgeInsets.only(
-                    left: 8.0.wp,
-                  ),
-                  child: const Icon(
-                    CupertinoIcons.person_fill,
-                    size: 30,
+                icon: ShaderMask(
+                  blendMode: BlendMode.srcIn,
+                  shaderCallback: (Rect bounds) => RadialGradient(
+                    center: Alignment.topCenter,
+                    stops: const [.5, 1],
+                    colors: [
+                      Colors.blue.shade400,
+                      Colors.blue.shade900,
+                    ],
+                  ).createShader(bounds),
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 8.0.wp),
+                    child: const Icon(
+                      CupertinoIcons.person_fill,
+                      size: 35,
+                    ),
                   ),
                 ),
               ),

@@ -25,15 +25,45 @@ class TaskCard extends StatelessWidget {
       child: Container(
         width: squareWidth / 2,
         height: squareWidth / 2,
-        margin: EdgeInsets.all(2.5.wp),
+        margin: EdgeInsets.all(3.0.wp),
         decoration: BoxDecoration(
-          color: color.withOpacity(0.3),
+          color: Colors.white,
+          // color: color.withOpacity(0.1),
+          // gradient: LinearGradient(
+          //   begin: Alignment.topRight,
+          //   end: Alignment.bottomLeft,
+          //   stops: [
+          //     0.1,
+          //     0.6,
+          //   ],
+          //   colors: [
+          //     Colors.blue.shade400,
+          //     Colors.blue.shade900,
+          //   ],
+          // ),
+          border: Border.all(width: 1, color: Colors.grey),
           boxShadow: [
+            // BoxShadow(
+            //   color: Colors.grey[300]!,
+            //   blurRadius: 7,
+            //   offset: const Offset(0, 7),
+            // )
             BoxShadow(
-              color: Colors.grey[300]!,
-              blurRadius: 7,
-              offset: const Offset(0, 7),
-            )
+              color: Colors.grey.shade600,
+              spreadRadius: 0.5,
+              blurRadius: 5,
+              offset: const Offset(0, 5),
+            ),
+            BoxShadow(
+              spreadRadius: 0.5,
+              blurRadius: 5,
+              color: Colors.grey.shade500,
+              offset: const Offset(5, 0),
+            ),
+            // BoxShadow(
+            //   color: Colors.grey.shade300,
+            //   offset: const Offset(5, 0),
+            // )
           ],
           borderRadius: BorderRadius.circular(30),
         ),

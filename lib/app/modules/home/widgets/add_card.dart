@@ -25,8 +25,9 @@ class AddCard extends StatelessWidget {
         onTap: () async {
           await Get.defaultDialog(
             titlePadding: EdgeInsets.symmetric(vertical: 5.0.wp),
-            radius: 5,
+            radius: 20,
             title: 'Task Type',
+            titleStyle: GoogleFonts.poppins(fontWeight: FontWeight.w500),
             content: Form(
               key: homeCtrl.formKey,
               child: Column(
@@ -35,10 +36,10 @@ class AddCard extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 3.0.wp),
                     child: TextFormField(
                       controller: homeCtrl.editCtrl,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Title',
-                      ),
+                      decoration: InputDecoration(
+                          border: const OutlineInputBorder(),
+                          labelText: 'Title',
+                          labelStyle: GoogleFonts.poppins()),
                       validator: (value) {
                         if (value == null || value.trim().isEmpty) {
                           return 'Please enter your task title';
@@ -70,29 +71,34 @@ class AddCard extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: blue,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20)),
-                        minimumSize: const Size(150, 40),
-                      ),
-                      onPressed: () {
-                        if (homeCtrl.formKey.currentState!.validate()) {
-                          int icon =
-                              icons[homeCtrl.chipIndex.value].icon!.codePoint;
-                          String color =
-                              icons[homeCtrl.chipIndex.value].color!.toHex();
-                          var task = Task(
-                              title: homeCtrl.editCtrl.text,
-                              icon: icon,
-                              color: color);
-                          Get.back();
-                          homeCtrl.addTask(task)
-                              ? EasyLoading.showSuccess('Created Successfully')
-                              : EasyLoading.showError('Duplicated Task');
-                        }
-                      },
-                      child: const Text('Confirm'))
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: blue,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      minimumSize: const Size(150, 40),
+                    ),
+                    onPressed: () {
+                      if (homeCtrl.formKey.currentState!.validate()) {
+                        int icon =
+                            icons[homeCtrl.chipIndex.value].icon!.codePoint;
+                        String color =
+                            icons[homeCtrl.chipIndex.value].color!.toHex();
+                        var task = Task(
+                            title: homeCtrl.editCtrl.text,
+                            icon: icon,
+                            color: color);
+                        Get.back();
+                        homeCtrl.addTask(task)
+                            ? EasyLoading.showSuccess('Created Successfully')
+                            : EasyLoading.showError('Duplicated Task');
+                      }
+                    },
+                    child: Text(
+                      'Confirm',
+                      style: GoogleFonts.poppins(
+                          color: Colors.white, fontWeight: FontWeight.w600),
+                    ),
+                  )
                 ],
               ),
             ),
