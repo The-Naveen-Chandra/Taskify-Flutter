@@ -34,7 +34,7 @@ class InfoCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // height: MediaQuery.of(context).size.height / 4.5,
       width: MediaQuery.of(context).size.width,
       child: Stack(
