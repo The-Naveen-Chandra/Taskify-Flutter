@@ -52,18 +52,18 @@ class HomePage extends GetView<HomeController> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 40,
-                              width: 40,
+                              height: 50,
+                              width: 50,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(10),
                                 child: Image.asset(
-                                  "assets/images/profile.jpg",
+                                  "assets/images/logo.png",
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
-                            const SizedBox(
-                              width: 10,
+                            SizedBox(
+                              width: 2.0.wp,
                             ),
                             // Text(
                             //   "Hi, Xo !",
@@ -76,11 +76,11 @@ class HomePage extends GetView<HomeController> {
                             GradientText(
                               'Hello Flutter',
                               style: GoogleFonts.poppins(
-                                  fontSize: 22, fontWeight: FontWeight.w500),
+                                  fontSize: 22, fontWeight: FontWeight.w600),
                               gradient: LinearGradient(
                                 colors: [
-                                  Colors.blue.shade400,
-                                  Colors.blue.shade900,
+                                  Colors.orange.shade300,
+                                  Colors.orange.shade900,
                                 ],
                               ),
                             ),
@@ -136,13 +136,25 @@ class HomePage extends GetView<HomeController> {
                     padding: EdgeInsets.symmetric(
                         vertical: 1.0.wp, horizontal: 4.0.wp),
                     child: Center(
-                      child: Text(
-                        "Tasks",
-                        style: GoogleFonts.poppins(
-                          fontSize: 16.0.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.grey[800],
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            width: 40,
+                            height: 40,
+                            child: Image.asset(
+                              "assets/images/double-check.gif",
+                            ),
+                          ),
+                          Text(
+                            "Tasks",
+                            style: GoogleFonts.poppins(
+                              fontSize: 16.0.sp,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),

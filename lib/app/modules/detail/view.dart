@@ -26,7 +26,7 @@ class DetailPage extends StatelessWidget {
           // automaticallyImplyLeading: false,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new),
-            color: Colors.black,
+            color: Colors.orange[500],
             onPressed: () {
               Get.back();
               homeCtrl.updateTodos();
@@ -49,7 +49,7 @@ class DetailPage extends StatelessWidget {
                 color: color,
               ),
               SizedBox(
-                width: 3.0.wp,
+                width: 2.0.wp,
               ),
               // Text(
               //   task.title,

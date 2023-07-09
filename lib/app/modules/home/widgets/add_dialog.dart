@@ -23,7 +23,10 @@ class AddDialog extends StatelessWidget {
               homeCtrl.editCtrl.clear();
               homeCtrl.changeTask(null);
             },
-            icon: const Icon(Icons.close),
+            icon:  Icon(
+              Icons.close, color: Colors.orange[500],
+              size: 30,
+            ),
           ),
           centerTitle: true,
           title: GradientText(
