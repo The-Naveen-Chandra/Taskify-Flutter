@@ -99,8 +99,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         // leading: const BackButton(),
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
         title: Row(
@@ -191,20 +193,22 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(
+                       Icon(
                         CupertinoIcons.person,
-                        size: 50,
+                        size: 10.0.wp,
                       ),
                       SizedBox(width: 5.wp),
 
                       // user email
-                      Text(
-                        currentUser.email!,
-                        textAlign: TextAlign.center,
-                        style: GoogleFonts.poppins(
-                          color: Colors.grey[900],
-                          fontWeight: FontWeight.w500,
-                          fontSize: 13.0.sp,
+                      Expanded(
+                        child: Text(
+                          currentUser.email!,
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.w500,
+                            fontSize: 12.0.sp,
+                          ),
                         ),
                       ),
                     ],
@@ -219,7 +223,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: GradientText(
                     'My details',
                     style: GoogleFonts.poppins(
-                      fontSize: 16.0.sp,
+                      fontSize: 14.0.sp,
                       fontWeight: FontWeight.w600,
                     ),
                     gradient: LinearGradient(

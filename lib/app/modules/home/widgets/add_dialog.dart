@@ -9,6 +9,7 @@ import 'gradient_text.dart';
 
 class AddDialog extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
+
   AddDialog({Key? key}) : super(key: key);
 
   @override
@@ -16,15 +17,18 @@ class AddDialog extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           leading: IconButton(
             onPressed: () {
               Get.back();
               homeCtrl.editCtrl.clear();
               homeCtrl.changeTask(null);
             },
-            icon:  Icon(
-              Icons.close, color: Colors.orange[500],
+            icon: Icon(
+              Icons.close,
+              color: Colors.orange[500],
               size: 30,
             ),
           ),
@@ -235,7 +239,7 @@ class AddDialog extends StatelessWidget {
                     child: Text(
                       "Done",
                       style: GoogleFonts.poppins(
-                        fontSize: 14.0.sp,
+                        fontSize: 12.0.sp,
                         fontWeight: FontWeight.w600,
                         color: Colors.blue,
                       ),

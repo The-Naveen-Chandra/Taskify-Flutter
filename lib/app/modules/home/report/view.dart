@@ -29,7 +29,7 @@ class ReportPage extends StatelessWidget {
         title: GradientText(
           "Taskify Report",
           style: GoogleFonts.poppins(
-              fontSize: 20.0.sp, fontWeight: FontWeight.w600),
+              fontSize: 18.0.sp, fontWeight: FontWeight.w600),
           gradient: LinearGradient(
             colors: [
               Colors.green.shade800,
@@ -57,7 +57,7 @@ class ReportPage extends StatelessWidget {
                     child: Text(
                       DateFormat.yMMMMd().format(DateTime.now()),
                       style: GoogleFonts.poppins(
-                        fontSize: 16.0.sp,
+                        fontSize: 14.0.sp,
                         color: Colors.black,
                         fontWeight: FontWeight.w600,
                       ),
@@ -115,8 +115,8 @@ class ReportPage extends StatelessWidget {
                 ),
                 UnconstrainedBox(
                   child: Container(
-                    width: 90.0.wp,
-                    height: 90.0.wp,
+                    width: 80.0.wp,
+                    height: 80.0.wp,
                     padding: EdgeInsets.all(10.0.wp),
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black),
@@ -182,9 +182,9 @@ class ReportPage extends StatelessWidget {
 
   Container _buildStatus(Color color, int number, String text) {
     return Container(
-      height: 29.0.wp,
-      width: 29.0.wp,
-      padding: EdgeInsets.symmetric(vertical: 5.0.wp, horizontal: 1.0.wp),
+      height:26.0.wp,
+      width: 26.0.wp,
+      padding: EdgeInsets.symmetric(vertical: 4.0.wp, horizontal: 1.0.wp),
       decoration: BoxDecoration(
         border: Border.all(
           width: 2,
@@ -238,7 +238,7 @@ class ReportPage extends StatelessWidget {
               Text(
                 text,
                 style: GoogleFonts.poppins(
-                    fontSize: 12.0.sp,
+                    fontSize: 10.0.sp,
                     color: Colors.black,
                     fontWeight: FontWeight.w600),
               ),

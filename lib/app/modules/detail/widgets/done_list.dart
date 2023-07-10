@@ -27,7 +27,7 @@ class DoneList extends StatelessWidget {
                     children: [
                       const Icon(
                         CupertinoIcons.checkmark_square_fill,
-                        size: 30,
+                        size: 25,
                         color: Colors.green,
                       ),
                       SizedBox(
@@ -36,7 +36,7 @@ class DoneList extends StatelessWidget {
                       Text(
                         'Completed (${homeCtrl.doneTodos.length})',
                         style: GoogleFonts.poppins(
-                            fontSize: 14.0.sp,
+                            fontSize: 13.0.sp,
                             color: Colors.black,
                             fontWeight: FontWeight.w600),
                       ),

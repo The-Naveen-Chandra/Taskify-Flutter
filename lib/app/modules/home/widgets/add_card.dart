@@ -11,6 +11,7 @@ import 'package:taskify/app/widgets/icons.dart';
 
 class AddCard extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
+
   AddCard({Key? key}) : super(key: key);
 
   @override
@@ -53,7 +54,9 @@ class AddCard extends StatelessWidget {
                     child: Wrap(
                       spacing: 2.0.wp,
                       children: icons
-                          .map((e) => Obx(() {
+                          .map(
+                            (e) => Obx(
+                              () {
                                 final index = icons.indexOf(e);
                                 return ChoiceChip(
                                   selectedColor: Colors.grey[200],
@@ -66,7 +69,9 @@ class AddCard extends StatelessWidget {
                                         selected ? index : 0;
                                   },
                                 );
-                              }))
+                              },
+                            ),
+                          )
                           .toList(),
                     ),
                   ),

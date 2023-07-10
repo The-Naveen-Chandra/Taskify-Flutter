@@ -13,6 +13,7 @@ import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 
 class DetailPage extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
+
   DetailPage({Key? key}) : super(key: key);
 
   @override
@@ -22,7 +23,10 @@ class DetailPage extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
+        backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
+          backgroundColor: Colors.white,
           // automaticallyImplyLeading: false,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_new),
@@ -34,12 +38,12 @@ class DetailPage extends StatelessWidget {
               homeCtrl.editCtrl.clear();
             },
           ),
-          centerTitle: true,
+          centerTitle: false,
           title: Row(
             children: [
-              SizedBox(
-                width: 15.0.wp,
-              ),
+              // SizedBox(
+              //   width: 15.0.wp,
+              // ),
               Icon(
                 IconData(
                   task.icon,
@@ -58,15 +62,15 @@ class DetailPage extends StatelessWidget {
               //     fontWeight: FontWeight.w600,
               //   ),
               // ),
-              GradientText(
-                task.title,
-                style: GoogleFonts.poppins(
-                    fontSize: 20.0.sp, fontWeight: FontWeight.w600),
-                gradient: LinearGradient(
-                  colors: [
-                    color,
-                    Colors.blue.shade900,
-                  ],
+              Expanded(
+                child: Text(
+                  task.title,
+                  overflow: TextOverflow.ellipsis,
+                  style: GoogleFonts.poppins(
+                    fontSize: 14.0.sp,
+                    fontWeight: FontWeight.w600,
+
+                  ),
                 ),
               ),
             ],
@@ -83,7 +87,7 @@ class DetailPage extends StatelessWidget {
               },
               icon: Icon(
                 Icons.data_usage_rounded,
-                size: 30,
+                size: 8.0.wp,
                 color: color,
               ),
             ),
@@ -133,16 +137,17 @@ class DetailPage extends StatelessWidget {
                             ? const SizedBox()
                             : Padding(
                                 padding: EdgeInsets.only(
-                                  left: 4.0.wp,
-                                  top: 4.0.wp,
-                                  right: 4.0.wp,
+                                  left: 5.0.wp,
+                                  top: 2.0.wp,
+                                  right: 5.0.wp,
                                 ),
                                 child: Row(
                                   children: [
                                     Text(
                                       '$totalTodos Tasks Created',
                                       style: GoogleFonts.poppins(
-                                        fontSize: 14.0.sp,
+                                        fontSize: 12.0.sp,
+                                        fontWeight: FontWeight.w500,
                                         color: Colors.black,
                                       ),
                                     ),

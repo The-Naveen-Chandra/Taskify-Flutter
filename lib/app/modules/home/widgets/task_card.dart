@@ -10,6 +10,7 @@ import 'package:taskify/app/modules/home/controller.dart';
 class TaskCard extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
   final Task task;
+
   TaskCard({Key? key, required this.task}) : super(key: key);
 
   @override
@@ -25,7 +26,7 @@ class TaskCard extends StatelessWidget {
       child: Container(
         width: squareWidth / 2,
         height: squareWidth / 2,
-        margin: EdgeInsets.all(3.0.wp),
+        margin: EdgeInsets.all(4.0.wp),
         decoration: BoxDecoration(
           color: Colors.white,
           // color: color.withOpacity(0.1),
@@ -121,7 +122,7 @@ class TaskCard extends StatelessWidget {
                     task.title,
                     style: GoogleFonts.poppins(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14.0.sp,
+                      fontSize: 12.0.sp,
                     ),
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -142,6 +143,7 @@ class TaskCard extends StatelessWidget {
                           '${homeCtrl.isTodosEmpty(task) ? 0 : homeCtrl.getDoneTodo(task)} done',
                           style: GoogleFonts.poppins(
                             fontWeight: FontWeight.bold,
+                            fontSize: 10.0.sp,
                             color: color.withOpacity(0.8),
                           ),
                         ),
@@ -156,6 +158,7 @@ class TaskCard extends StatelessWidget {
                         child: Text(
                           '${homeCtrl.isTodosEmpty(task) ? 0 : task.todos!.length} tasks',
                           style: GoogleFonts.poppins(
+                            fontSize: 10.0.sp,
                             fontWeight: FontWeight.bold,
                             color: color.withOpacity(0.8),
                           ),

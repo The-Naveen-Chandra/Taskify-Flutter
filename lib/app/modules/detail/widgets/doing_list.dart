@@ -6,6 +6,7 @@ import 'package:taskify/app/modules/home/controller.dart';
 
 class DoingList extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
+
   DoingList({super.key});
 
   @override
@@ -58,7 +59,7 @@ class DoingList extends StatelessWidget {
                           children: [
                             const Icon(
                               Icons.create,
-                              size: 30,
+                              size: 25,
                               color: Colors.blue,
                             ),
                             SizedBox(
@@ -67,9 +68,10 @@ class DoingList extends StatelessWidget {
                             Text(
                               'Created (${homeCtrl.doingTodos.length})',
                               style: GoogleFonts.poppins(
-                                  fontSize: 14.0.sp,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600),
+                                fontSize: 13.0.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ],
                         )

@@ -38,7 +38,9 @@ class LandingView extends StatelessWidget {
     //       return const HomePage();
     //     } else {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         centerTitle: false,
         title: SizedBox(
           width: 25.0.wp,
@@ -100,8 +102,8 @@ class LandingView extends StatelessWidget {
                       ),
                       gradient: LinearGradient(
                         colors: [
-                          Colors.grey.shade900,
-                          Colors.blue.shade700,
+                          Colors.blue.shade500,
+                          Colors.blue.shade900,
                         ],
                       ),
                     ),

@@ -78,106 +78,108 @@ class _LoginViewState extends State<LoginView> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // logo
-              Image.asset(
-                "assets/images/logo.png",
-                height: 150,
-              ),
-
-              SizedBox(
-                height: 2.hp,
-              ),
-
-              // welcome back message
-              // Text(
-              //   "Welcome back, you've been missed",
-              //   style: GoogleFonts.poppins(
-              //     fontWeight: FontWeight.w500,
-              //     color: Colors.grey[700],
-              //     fontSize: 12.0.sp,
-              //   ),
-              // ),
-              GradientText(
-                "Welcome back, you've been missed.",
-                style: GoogleFonts.poppins(
-                  fontSize: 12.0.sp,
-                  fontWeight: FontWeight.w600,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // logo
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 150,
                 ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.orange.shade900,
-                    Colors.blue.shade700,
-                  ],
+
+                SizedBox(
+                  height: 2.hp,
                 ),
-              ),
 
-              SizedBox(
-                height: 3.hp,
-              ),
-
-              // email text-field
-              MyTextField(
-                controller: emailTextController,
-                hintText: "Email",
-                obscureText: false,
-              ),
-
-              SizedBox(
-                height: 1.8.hp,
-              ),
-
-              // password text-field
-              MyTextField(
-                controller: passwordTextController,
-                hintText: "Password",
-                obscureText: true,
-              ),
-
-              SizedBox(
-                height: 5.hp,
-              ),
-
-              // sign in button
-              MyButton(
-                text: "Sign In",
-                onTap: signIn,
-              ),
-
-              // not a member? register now
-              SizedBox(
-                height: 5.hp,
-              ),
-
-              // not a member?  register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Not a member ?  ",
-                    style: GoogleFonts.poppins(
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.w500,
-                    ),
+                // welcome back message
+                // Text(
+                //   "Welcome back, you've been missed",
+                //   style: GoogleFonts.poppins(
+                //     fontWeight: FontWeight.w500,
+                //     color: Colors.grey[700],
+                //     fontSize: 12.0.sp,
+                //   ),
+                // ),
+                GradientText(
+                  "Welcome back, you've been missed.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.0.sp,
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(width: 4),
-                  GestureDetector(
-                    onTap: widget.onTap,
-                    child: Text(
-                      "Register now",
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.orange.shade900,
+                      Colors.blue.shade700,
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: 3.hp,
+                ),
+
+                // email text-field
+                MyTextField(
+                  controller: emailTextController,
+                  hintText: "Email",
+                  obscureText: false,
+                ),
+
+                SizedBox(
+                  height: 1.8.hp,
+                ),
+
+                // password text-field
+                MyTextField(
+                  controller: passwordTextController,
+                  hintText: "Password",
+                  obscureText: true,
+                ),
+
+                SizedBox(
+                  height: 5.hp,
+                ),
+
+                // sign in button
+                MyButton(
+                  text: "Sign In",
+                  onTap: signIn,
+                ),
+
+                // not a member? register now
+                SizedBox(
+                  height: 5.hp,
+                ),
+
+                // not a member?  register now
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Not a member ?  ",
                       style: GoogleFonts.poppins(
-                        color: Colors.blue,
+                        color: Colors.grey[700],
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: Text(
+                        "Register now",
+                        style: GoogleFonts.poppins(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

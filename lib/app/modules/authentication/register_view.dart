@@ -100,108 +100,110 @@ class _RegisterViewState extends State<RegisterView> {
           ),
         ),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            // mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // logo
-              Image.asset(
-                "assets/images/logo.png",
-                height: 150,
-              ),
-
-              SizedBox(
-                height: 2.hp,
-              ),
-
-              GradientText(
-                "Let's create an account for you.",
-                style: GoogleFonts.poppins(
-                  fontSize: 12.0.sp,
-                  fontWeight: FontWeight.w600,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                // logo
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 150,
                 ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.orange.shade900,
-                    Colors.blue.shade700,
-                  ],
+
+                SizedBox(
+                  height: 2.hp,
                 ),
-              ),
 
-              SizedBox(
-                height: 3.hp,
-              ),
-
-              // email text-field
-              MyTextField(
-                controller: emailTextController,
-                hintText: "Email",
-                obscureText: false,
-              ),
-
-              SizedBox(
-                height: 1.8.hp,
-              ),
-
-              // password text-field
-              MyTextField(
-                controller: passwordTextController,
-                hintText: "Password",
-                obscureText: true,
-              ),
-
-              SizedBox(
-                height: 1.8.hp,
-              ),
-
-              // confirm password text-field
-              MyTextField(
-                controller: confirmTextPasswordController,
-                hintText: "Confirm Password",
-                obscureText: true,
-              ),
-
-              SizedBox(
-                height: 5.hp,
-              ),
-
-              // sign up button
-              MyButton(
-                text: "Sign Up",
-                onTap: signUp,
-              ),
-
-              // not a member? register now
-              SizedBox(
-                height: 5.hp,
-              ),
-
-              // not a member?  register now
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Already have an account.  ",
-                    style: GoogleFonts.poppins(
-                      color: Colors.grey[700],
-                      fontWeight: FontWeight.w500,
-                    ),
+                GradientText(
+                  "Let's create an account for you.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.0.sp,
+                    fontWeight: FontWeight.w600,
                   ),
-                  const SizedBox(width: 4),
-                  GestureDetector(
-                    onTap: widget.onTap,
-                    child: Text(
-                      "Login now",
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.orange.shade900,
+                      Colors.blue.shade700,
+                    ],
+                  ),
+                ),
+
+                SizedBox(
+                  height: 3.hp,
+                ),
+
+                // email text-field
+                MyTextField(
+                  controller: emailTextController,
+                  hintText: "Email",
+                  obscureText: false,
+                ),
+
+                SizedBox(
+                  height: 1.8.hp,
+                ),
+
+                // password text-field
+                MyTextField(
+                  controller: passwordTextController,
+                  hintText: "Password",
+                  obscureText: true,
+                ),
+
+                SizedBox(
+                  height: 1.8.hp,
+                ),
+
+                // confirm password text-field
+                MyTextField(
+                  controller: confirmTextPasswordController,
+                  hintText: "Confirm Password",
+                  obscureText: true,
+                ),
+
+                SizedBox(
+                  height: 5.hp,
+                ),
+
+                // sign up button
+                MyButton(
+                  text: "Sign Up",
+                  onTap: signUp,
+                ),
+
+                // not a member? register now
+                SizedBox(
+                  height: 5.hp,
+                ),
+
+                // not a member?  register now
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Already have an account.  ",
                       style: GoogleFonts.poppins(
-                        color: Colors.blue,
+                        color: Colors.grey[700],
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                    const SizedBox(width: 4),
+                    GestureDetector(
+                      onTap: widget.onTap,
+                      child: Text(
+                        "Login now",
+                        style: GoogleFonts.poppins(
+                          color: Colors.blue,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -290,61 +292,63 @@ class _UsernameAndBioScreen extends State<UsernameAndBioScreen> {
         ),
         automaticallyImplyLeading: false,
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            children: [
-              // logo
-              Image.asset(
-                "assets/images/logo.png",
-                height: 150,
-              ),
-              SizedBox(height: 2.hp),
-
-              // Fill in your username and bio
-              GradientText(
-                "Fill in your username and bio.",
-                style: GoogleFonts.poppins(
-                  fontSize: 12.0.sp,
-                  fontWeight: FontWeight.w600,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Center(
+            child: Column(
+              children: [
+                // logo
+                Image.asset(
+                  "assets/images/logo.png",
+                  height: 150,
                 ),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.orange.shade900,
-                    Colors.blue.shade700,
-                  ],
+                SizedBox(height: 2.hp),
+
+                // Fill in your username and bio
+                GradientText(
+                  "Fill in your username and bio.",
+                  style: GoogleFonts.poppins(
+                    fontSize: 12.0.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.orange.shade900,
+                      Colors.blue.shade700,
+                    ],
+                  ),
                 ),
-              ),
 
-              SizedBox(height: 3.hp),
+                SizedBox(height: 3.hp),
 
-              // username text-field
-              MyTextField(
-                controller: usernameController,
-                hintText: "Username",
-                obscureText: false,
-              ),
+                // username text-field
+                MyTextField(
+                  controller: usernameController,
+                  hintText: "Username",
+                  obscureText: false,
+                ),
 
-              SizedBox(
-                height: 1.8.hp,
-              ),
+                SizedBox(
+                  height: 1.8.hp,
+                ),
 
-              // bio text-field
-              MyTextField(
-                controller: bioController,
-                hintText: "Bio",
-                obscureText: false,
-              ),
+                // bio text-field
+                MyTextField(
+                  controller: bioController,
+                  hintText: "Bio",
+                  obscureText: false,
+                ),
 
-              SizedBox(
-                height: 5.hp,
-              ),
+                SizedBox(
+                  height: 5.hp,
+                ),
 
-              MyButton(
-                text: "Save",
-                onTap: saveProfile,
-              ),
-            ],
+                MyButton(
+                  text: "Save",
+                  onTap: saveProfile,
+                ),
+              ],
+            ),
           ),
         ),
       ),

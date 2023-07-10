@@ -45,8 +45,7 @@ class HomePage extends GetView<HomeController> {
     // final userCollection = FirebaseFirestore.instance.collection("Users");
 
     return Scaffold(
-      // backgroundColor: Colors.grey[200],
-
+      backgroundColor: Colors.white,
       body: Obx(
         () => IndexedStack(
           index: controller.tabIndex.value,
@@ -139,7 +138,7 @@ class HomePage extends GetView<HomeController> {
                     ),
                   ),
                   SizedBox(
-                    height: MediaQuery.of(context).size.height / 5,
+                    height: MediaQuery.of(context).size.height / 5.2,
                     child: PageView.builder(
                       // controller: pageController,
                       // onPageChanged: (int index) {
