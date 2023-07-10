@@ -1,13 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taskify/app/data/services/storage/services.dart';
-import 'package:taskify/app/modules/authentication/login_or_register_view.dart';
+import 'package:taskify/app/modules/authentication/auth.dart';
 import 'package:taskify/app/modules/home/binding.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:taskify/firebase_options.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Color(0xfafafafa),
@@ -29,7 +35,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       title: 'Taskify - An AI Powered App',
       debugShowCheckedModeBanner: false,
-      home: const LoginOrRegisterView(),
+      home: const AuthView(),
       initialBinding: HomeBinding(),
       builder: EasyLoading.init(),
     );

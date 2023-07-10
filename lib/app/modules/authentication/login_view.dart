@@ -1,8 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
-import 'package:taskify/app/modules/authentication/widgets/my_button.dart';
-import 'package:taskify/app/modules/authentication/widgets/text_field.dart';
+import 'package:taskify/app/modules/authentication/widgets/widgets.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 
 class LoginView extends StatefulWidget {
@@ -17,11 +18,47 @@ class LoginView extends StatefulWidget {
   State<LoginView> createState() => _LoginViewState();
 }
 
-// text editing controllers
-final emailTextController = TextEditingController();
-final passwordTextController = TextEditingController();
-
 class _LoginViewState extends State<LoginView> {
+  // text editing controllers
+  final emailTextController = TextEditingController();
+  final passwordTextController = TextEditingController();
+
+  // signIn function
+  void signIn() async {
+    // show loading circle
+    showDialog(
+      context: context,
+      builder: (context) {
+        return const Center(
+          child: CupertinoActivityIndicator(),
+        );
+      },
+    );
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailTextController.text,
+        password: passwordTextController.text,
+      );
+      // pop the context
+      if (context.mounted) Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      // pop the context
+      Navigator.pop(context);
+      // show error message
+      showErrorMsg(e.code);
+    }
+  }
+
+  // error email message popup
+  void showErrorMsg(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return MyAlertDialog(content: message);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +67,9 @@ class _LoginViewState extends State<LoginView> {
         title: GradientText(
           'Taskify',
           style: GoogleFonts.poppins(
-              fontSize: 20.0.sp, fontWeight: FontWeight.w600,),
+            fontSize: 20.0.sp,
+            fontWeight: FontWeight.w600,
+          ),
           gradient: LinearGradient(
             colors: [
               Colors.orange.shade300,
@@ -106,7 +145,7 @@ class _LoginViewState extends State<LoginView> {
               // sign in button
               MyButton(
                 text: "Sign In",
-                onTap: () {},
+                onTap: signIn,
               ),
 
               // not a member? register now
