@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:taskify/app/data/services/storage/services.dart';
+import 'package:taskify/app/modules/authentication/login_or_register_view.dart';
 import 'package:taskify/app/modules/home/binding.dart';
-import 'package:taskify/app/modules/home/view.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:taskify/app/modules/landing/landing_view.dart';
 
 void main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       title: 'Taskify - An AI Powered App',
       debugShowCheckedModeBanner: false,
-      home: const LandingView(),
+      home: const LoginOrRegisterView(),
       initialBinding: HomeBinding(),
       builder: EasyLoading.init(),
     );
