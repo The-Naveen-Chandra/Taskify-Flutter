@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
-import 'package:taskify/app/modules/home/view.dart';
+import 'package:taskify/app/modules/authentication/auth.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 
 class LandingView extends StatelessWidget {
@@ -145,7 +145,7 @@ class LandingView extends StatelessWidget {
                     onPressed: () => Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomePage(),
+                        builder: (context) => const AuthView(),
                       ),
                     ),
                     child: Row(

@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -5,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/data/models/task.dart';
+import 'package:taskify/app/modules/authentication/widgets/my_alert_dialog.dart';
 import 'package:taskify/app/modules/home/controller.dart';
 import 'package:taskify/app/modules/home/widgets/add_card.dart';
 import 'package:taskify/app/modules/home/widgets/add_dialog.dart';
@@ -16,6 +19,7 @@ import 'package:taskify/app/modules/home/profile/view.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
+
   // final PageController pageController = PageController();
   // int currentPage = 0;
 
@@ -33,6 +37,13 @@ class HomePage extends GetView<HomeController> {
     //     curve: Curves.ease,
     //   );
     // });
+
+    // current user
+    final currentUser = FirebaseAuth.instance.currentUser!;
+
+    // // all the users
+    // final userCollection = FirebaseFirestore.instance.collection("Users");
+
     return Scaffold(
       // backgroundColor: Colors.grey[200],
 
@@ -73,16 +84,36 @@ class HomePage extends GetView<HomeController> {
                             //     color: Colors.black,
                             //   ),
                             // ),
-                            GradientText(
-                              'Hello Flutter',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 22, fontWeight: FontWeight.w600),
-                              gradient: LinearGradient(
-                                colors: [
-                                  Colors.orange.shade300,
-                                  Colors.orange.shade900,
-                                ],
-                              ),
+                            StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("Users")
+                                  .doc(currentUser.email)
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                // get the user data
+                                if (snapshot.hasData) {
+                                  final userData = snapshot.data!.data()
+                                      as Map<String, dynamic>;
+
+                                  return GradientText(
+                                    'Hi, ${userData['Username']}',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.orange.shade300,
+                                        Colors.orange.shade900,
+                                      ],
+                                    ),
+                                  );
+                                } else if (snapshot.hasError) {
+                                  return MyAlertDialog(content: snapshot.error.toString());
+                                }
+                                return const Center(
+                                  child: CupertinoActivityIndicator(),
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -197,25 +228,42 @@ class HomePage extends GetView<HomeController> {
       floatingActionButton: DragTarget<Task>(
         builder: (_, __, ___) {
           return Obx(
-            () => FloatingActionButton(
-              shape: RoundedRectangleBorder(
+            () => Container(
+              decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.shade600,
+                    spreadRadius: 0.5,
+                    blurRadius: 5,
+                    offset: const Offset(0, 5),
+                  ),
+                  BoxShadow(
+                    color: Colors.grey.shade200,
+                    offset: const Offset(0, 0),
+                  ),
+                ],
               ),
-              backgroundColor:
-                  controller.deleting.value ? Colors.red : Colors.black,
-              onPressed: () {
-                if (controller.tasks.isNotEmpty) {
-                  Get.to(() => AddDialog(), transition: Transition.fade);
-                } else {
-                  EasyLoading.showInfo('Please create your task type');
-                }
-              },
-              child: Icon(
-                controller.deleting.value
-                    ? CupertinoIcons.delete
-                    : Icons.add_rounded,
-                size: 40,
-                color: Colors.white,
+              child: FloatingActionButton(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                backgroundColor:
+                    controller.deleting.value ? Colors.red : Colors.black,
+                onPressed: () {
+                  if (controller.tasks.isNotEmpty) {
+                    Get.to(() => AddDialog(), transition: Transition.fade);
+                  } else {
+                    EasyLoading.showInfo('Please create your task type');
+                  }
+                },
+                child: Icon(
+                  controller.deleting.value
+                      ? CupertinoIcons.delete
+                      : Icons.add_rounded,
+                  size: 40,
+                  color: Colors.white,
+                ),
               ),
             ),
           );
