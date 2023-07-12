@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
+import 'package:taskify/app/modules/aria/aria_view.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 
 // ignore: must_be_immutable
@@ -42,7 +43,7 @@ class InfoCards extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.all(15),
-            padding:  EdgeInsets.symmetric(vertical: 4.wp, horizontal: 4.wp),
+            padding: EdgeInsets.symmetric(vertical: 4.wp, horizontal: 4.wp),
             decoration: BoxDecoration(
               color: bgColor,
               borderRadius: BorderRadius.circular(20),
@@ -110,7 +111,8 @@ class InfoCards extends StatelessWidget {
                             ? GradientText(
                                 title,
                                 style: GoogleFonts.poppins(
-                                    fontSize: 18.0.sp, fontWeight: FontWeight.w600),
+                                    fontSize: 18.0.sp,
+                                    fontWeight: FontWeight.w600),
                                 gradient: const LinearGradient(
                                   colors: [
                                     Colors.red,
@@ -167,10 +169,18 @@ class InfoCards extends StatelessWidget {
                             Colors.blue.shade900,
                           ],
                         ).createShader(bounds),
-                        child: Image.asset(
-                          "assets/images/rocket-lunch.png",
-                          width: 25,
-                          height: 25,
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const AriaView(),
+                            ),
+                          ),
+                          child: Image.asset(
+                            "assets/images/rocket-lunch.png",
+                            width: 25,
+                            height: 25,
+                          ),
                         ),
                       ),
               ),

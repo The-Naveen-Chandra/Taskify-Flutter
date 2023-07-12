@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/data/models/task.dart';
+import 'package:taskify/app/modules/aria/aria_view.dart';
 import 'package:taskify/app/modules/authentication/widgets/my_alert_dialog.dart';
 import 'package:taskify/app/modules/home/controller.dart';
 import 'package:taskify/app/modules/home/widgets/add_card.dart';
@@ -107,7 +108,8 @@ class HomePage extends GetView<HomeController> {
                                     ),
                                   );
                                 } else if (snapshot.hasError) {
-                                  return MyAlertDialog(content: snapshot.error.toString());
+                                  return MyAlertDialog(
+                                      content: snapshot.error.toString());
                                 }
                                 return const Center(
                                   child: CupertinoActivityIndicator(),
@@ -128,10 +130,20 @@ class HomePage extends GetView<HomeController> {
                               Colors.blue.shade900,
                             ],
                           ).createShader(bounds),
-                          child: Image.asset(
-                            "assets/images/rocket-lunch.png",
-                            width: 25,
-                            height: 25,
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const AriaView(),
+                                ),
+                              );
+                            },
+                            child: Image.asset(
+                              "assets/images/rocket-lunch.png",
+                              width: 25,
+                              height: 25,
+                            ),
                           ),
                         ),
                       ],

@@ -9,7 +9,7 @@ import 'package:taskify/app/modules/detail/widgets/doing_list.dart';
 import 'package:taskify/app/modules/detail/widgets/done_list.dart';
 import 'package:taskify/app/modules/home/controller.dart';
 import 'package:taskify/app/modules/home/report/view.dart';
-import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 class DetailPage extends StatelessWidget {
   final homeCtrl = Get.find<HomeController>();
@@ -18,8 +18,12 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // var task = homeCtrl.task.value;
+    // var color = Hexcolor.fromHex(task!.color);
     var task = homeCtrl.task.value;
-    var color = Hexcolor.fromHex(task!.color);
+    var color =
+        task != null ? Hexcolor.fromHex(task.color) : Colors.transparent;
+
     return WillPopScope(
       onWillPop: () async => false,
       child: Scaffold(
@@ -46,7 +50,7 @@ class DetailPage extends StatelessWidget {
               // ),
               Icon(
                 IconData(
-                  task.icon,
+                  task?.icon ?? 0,
                   fontFamily: 'MaterialIcons',
                 ),
                 size: 35,
@@ -64,12 +68,11 @@ class DetailPage extends StatelessWidget {
               // ),
               Expanded(
                 child: Text(
-                  task.title,
+                  task?.title ?? '',
                   overflow: TextOverflow.ellipsis,
                   style: GoogleFonts.poppins(
                     fontSize: 14.0.sp,
                     fontWeight: FontWeight.w600,
-
                   ),
                 ),
               ),
@@ -93,159 +96,172 @@ class DetailPage extends StatelessWidget {
             ),
           ],
         ),
-        body: SingleChildScrollView(
-          child: Form(
-            key: homeCtrl.formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                // Padding(
-                //   padding: EdgeInsets.symmetric(
-                //     horizontal: 8.0.wp,
-                //   ),
-                //   child: Row(
-                //     children: [
-                //       Icon(
-                //         IconData(
-                //           task.icon,
-                //           fontFamily: 'MaterialIcons',
-                //         ),
-                //         color: color,
-                //       ),
-                //       SizedBox(
-                //         width: 3.0.wp,
-                //       ),
-                //       Text(
-                //         task.title,
-                //         style: TextStyle(
-                //           fontSize: 14.0.sp,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
+        body: Form(
+          key: homeCtrl.formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //     horizontal: 8.0.wp,
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       Icon(
+              //         IconData(
+              //           task.icon,
+              //           fontFamily: 'MaterialIcons',
+              //         ),
+              //         color: color,
+              //       ),
+              //       SizedBox(
+              //         width: 3.0.wp,
+              //       ),
+              //       Text(
+              //         task.title,
+              //         style: TextStyle(
+              //           fontSize: 14.0.sp,
+              //           fontWeight: FontWeight.bold,
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
 
-                Column(
-                  children: [
-                    Obx(
-                      () {
-                        var totalTodos = homeCtrl.doingTodos.length +
-                            homeCtrl.doneTodos.length;
-                        return homeCtrl.doingTodos.isEmpty &&
-                                homeCtrl.doneTodos.isEmpty
-                            ? const SizedBox()
-                            : Padding(
-                                padding: EdgeInsets.only(
-                                  left: 5.0.wp,
-                                  top: 2.0.wp,
-                                  right: 5.0.wp,
-                                ),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '$totalTodos Tasks Created',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12.0.sp,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                      ),
+              Flexible(
+                child: SizedBox(
+                  height: context.screenHeight,
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Obx(
+                          () {
+                            var totalTodos = homeCtrl.doingTodos.length +
+                                homeCtrl.doneTodos.length;
+                            return homeCtrl.doingTodos.isEmpty &&
+                                    homeCtrl.doneTodos.isEmpty
+                                ? const SizedBox()
+                                : Padding(
+                                    padding: EdgeInsets.only(
+                                      left: 5.0.wp,
+                                      top: 2.0.wp,
+                                      right: 5.0.wp,
                                     ),
-                                    SizedBox(
-                                      width: 2.0.wp,
-                                    ),
-                                    Expanded(
-                                      child: StepProgressIndicator(
-                                        totalSteps:
-                                            totalTodos == 0 ? 1 : totalTodos,
-                                        currentStep: homeCtrl.doneTodos.length,
-                                        size: 12,
-                                        padding: 0,
-                                        roundedEdges: const Radius.circular(30),
-                                        selectedGradientColor: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            color.withOpacity(0.5),
-                                            color
-                                          ],
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '$totalTodos Tasks Created',
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 12.0.sp,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
                                         ),
-                                        unselectedGradientColor: LinearGradient(
-                                          begin: Alignment.topLeft,
-                                          end: Alignment.bottomRight,
-                                          colors: [
-                                            Colors.grey[300]!,
-                                            Colors.grey[300]!
-                                          ],
+                                        SizedBox(
+                                          width: 2.0.wp,
                                         ),
-                                      ),
+                                        Expanded(
+                                          child: StepProgressIndicator(
+                                            totalSteps: totalTodos == 0
+                                                ? 1
+                                                : totalTodos,
+                                            currentStep:
+                                                homeCtrl.doneTodos.length,
+                                            size: 12,
+                                            padding: 0,
+                                            roundedEdges:
+                                                const Radius.circular(30),
+                                            selectedGradientColor:
+                                                LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                                color.withOpacity(0.5),
+                                                color
+                                              ],
+                                            ),
+                                            unselectedGradientColor:
+                                                LinearGradient(
+                                              begin: Alignment.topLeft,
+                                              end: Alignment.bottomRight,
+                                              colors: [
+                                                Colors.grey[300]!,
+                                                Colors.grey[300]!
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                  ],
-                                ),
-                              );
-                      },
+                                  );
+                          },
+                        ),
+                        DoingList(),
+                        DoneList(),
+                      ],
                     ),
-                    DoingList(),
-                    DoneList(),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(
-            top: 4.0.wp,
-            bottom: 12.0.wp,
-            left: 4.0.wp,
-            right: 4.0.wp,
-          ),
-          child: Container(
-            padding: EdgeInsets.symmetric(vertical: 2.0.wp),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(35),
-              border: Border.all(width: 1, color: Colors.black),
-              color: Colors.grey[200],
-            ),
-            child: TextFormField(
-              controller: homeCtrl.editCtrl,
-              autofocus: true,
-              decoration: InputDecoration(
-                // contentPadding: EdgeInsets.only(left: 8, right: 8),
-                hintText: "Write your task",
-                hintStyle: GoogleFonts.poppins(),
-                focusedBorder: InputBorder.none,
-                border: InputBorder.none,
-                prefixIcon: Icon(
-                  Icons.check_box_outline_blank,
-                  color: Colors.grey[500],
-                ),
-                suffixIcon: TextButton(
-                  onPressed: () {
-                    if (homeCtrl.formKey.currentState!.validate()) {
-                      var success = homeCtrl.addTodo(homeCtrl.editCtrl.text);
-                      if (success) {
-                        EasyLoading.showSuccess('Todo item added successfully');
-                      } else {
-                        EasyLoading.showError('Todo item already existed');
-                      }
-                      homeCtrl.editCtrl.clear();
-                    }
-                  },
-                  child: const Icon(
-                    Icons.done,
-                    size: 35,
-                    color: blue,
                   ),
                 ),
               ),
-              validator: (value) {
-                if (value == null || value.trim().isEmpty) {
-                  return 'Please enter your todo item';
-                }
-                return null;
-              },
-            ),
+              Padding(
+                padding: EdgeInsets.only(
+                  top: 2.0.wp,
+                  bottom: 2.0.wp,
+                  left: 4.0.wp,
+                  right: 4.0.wp,
+                ),
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 1.0.wp),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(35),
+                    border: Border.all(width: 1, color: Colors.black),
+                    color: Colors.grey[200],
+                  ),
+                  child: TextFormField(
+                    controller: homeCtrl.editCtrl,
+                    autofocus: true,
+                    decoration: InputDecoration(
+                      // contentPadding: EdgeInsets.only(left: 8, right: 8),
+                      hintText: "Write your task",
+                      hintStyle: GoogleFonts.poppins(),
+                      focusedBorder: InputBorder.none,
+                      border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.check_box_outline_blank,
+                        color: Colors.grey[500],
+                      ),
+                      suffixIcon: TextButton(
+                        onPressed: () {
+                          if (homeCtrl.formKey.currentState!.validate()) {
+                            var success =
+                                homeCtrl.addTodo(homeCtrl.editCtrl.text);
+                            if (success) {
+                              EasyLoading.showSuccess(
+                                  'Todo item added successfully');
+                            } else {
+                              EasyLoading.showError(
+                                  'Todo item already existed');
+                            }
+                            homeCtrl.editCtrl.clear();
+                          }
+                        },
+                        child: const Icon(
+                          Icons.done,
+                          size: 35,
+                          color: blue,
+                        ),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Please enter your todo item';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),

@@ -6,7 +6,9 @@ import 'package:taskify/app/modules/authentication/auth.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 
 class LandingView extends StatelessWidget {
-  const LandingView({Key? key});
+  const LandingView({
+    super.key,
+  });
 
   /* all the commented code is for Visited Page function */
 
