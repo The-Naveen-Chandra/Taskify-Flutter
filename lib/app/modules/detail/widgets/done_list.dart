@@ -95,7 +95,7 @@ class DoneList extends StatelessWidget {
                                       style: GoogleFonts.poppins(
                                           decoration:
                                               TextDecoration.lineThrough,
-                                          fontSize: 16,
+                                          fontSize: 12.0.sp,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),

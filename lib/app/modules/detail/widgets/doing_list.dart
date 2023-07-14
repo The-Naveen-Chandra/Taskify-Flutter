@@ -1,16 +1,45 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/modules/home/controller.dart';
+import 'package:velocity_x/velocity_x.dart';
 
-class DoingList extends StatelessWidget {
-  final homeCtrl = Get.find<HomeController>();
-
+class DoingList extends StatefulWidget {
   DoingList({super.key});
 
   @override
+  State<DoingList> createState() => _DoingListState();
+}
+
+class _DoingListState extends State<DoingList> {
+  //   @override
+  // void initState() {
+  //   super.initState();
+
+  // }
+
+  final homeCtrl = Get.find<HomeController>();
+
+  // timeOfDay variable
+  TimeOfDay timeOfDay = const TimeOfDay(hour: 12, minute: 0);
+
+  // time picker
+  void _timePicker() {
+    showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.now(),
+    ).then((value) {
+      setState(() {
+        timeOfDay = value!;
+      });
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    Vx.log(timeOfDay);
     return Obx(
       () => homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty
           ? Padding(
@@ -107,18 +136,30 @@ class DoingList extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 4.0.wp,
-                                  ),
-                                  child: Text(
-                                    element['title'],
-                                    overflow: TextOverflow.clip,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 4.0.wp,
+                                      ),
+                                      child: Text(
+                                        element['title'],
+                                        overflow: TextOverflow.clip,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12.0.sp,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
                                     ),
-                                  ),
+                                    GestureDetector(
+                                      onTap: _timePicker,
+                                      child: const Icon(
+                                        CupertinoIcons.clock,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -127,7 +168,8 @@ class DoingList extends StatelessWidget {
                       ),
                     )
                     .toList(),
-                if (homeCtrl.doingTodos.isNotEmpty)
+                if (homeCtrl.doingTodos.isNotEmpty &&
+                    homeCtrl.doneTodos.isNotEmpty)
                   Padding(
                     padding: EdgeInsets.only(
                       left: 5.0.wp,

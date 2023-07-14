@@ -170,7 +170,7 @@ class DetailPage extends StatelessWidget {
                                             size: 12,
                                             padding: 0,
                                             roundedEdges:
-                                                const Radius.circular(30),
+                                                const Radius.circular(10),
                                             selectedGradientColor:
                                                 LinearGradient(
                                               begin: Alignment.topLeft,

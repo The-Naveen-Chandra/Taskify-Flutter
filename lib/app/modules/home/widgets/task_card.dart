@@ -42,7 +42,7 @@ class TaskCard extends StatelessWidget {
           //     Colors.blue.shade900,
           //   ],
           // ),
-          border: Border.all(width: 1, color: Colors.grey),
+          border: Border.all(width: 1.5, color: Colors.black),
           boxShadow: [
             // BoxShadow(
             //   color: Colors.grey[300]!,
@@ -53,14 +53,14 @@ class TaskCard extends StatelessWidget {
               color: Colors.grey.shade600,
               spreadRadius: 0.5,
               blurRadius: 5,
-              offset: const Offset(0, 5),
+              offset: const Offset(0, 2),
             ),
-            BoxShadow(
-              spreadRadius: 0.5,
-              blurRadius: 5,
-              color: Colors.grey.shade500,
-              offset: const Offset(5, 0),
-            ),
+            // BoxShadow(
+            //   spreadRadius: 0.5,
+            //   blurRadius: 5,
+            //   color: Colors.grey.shade500,
+            //   offset: const Offset(5, 0),
+            // ),
             // BoxShadow(
             //   color: Colors.grey.shade300,
             //   offset: const Offset(5, 0),

@@ -17,11 +17,11 @@ class AddCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final icons = getIcons();
-    var squareWidth = Get.width - 12.9.wp;
+    var squareWidth = Get.width - 12.0.wp;
     return Container(
       width: squareWidth / 2,
       height: squareWidth / 2,
-      margin: EdgeInsets.all(3.0.wp),
+      margin: EdgeInsets.all(4.0.wp),
       child: InkWell(
         onTap: () async {
           await Get.defaultDialog(
