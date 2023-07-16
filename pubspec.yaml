@@ -51,6 +51,7 @@ dependencies:
       url: https://github.com/iampawan/Flutter-ChatGPT.git
   velocity_x: ^4.1.0
   flutter_dotenv: ^5.1.0
+  awesome_notifications: ^0.6.19
 
 dev_dependencies:
   flutter_test:
