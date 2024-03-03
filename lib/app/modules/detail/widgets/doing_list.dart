@@ -44,7 +44,7 @@ class _DoingListState extends State<DoingList> {
       () => homeCtrl.doingTodos.isEmpty && homeCtrl.doneTodos.isEmpty
           ? Padding(
               padding: EdgeInsets.only(
-                top: 30.0.wp,
+                top: 45.0.wp,
                 left: 0.0.wp,
                 right: 0.0.wp,
                 bottom: 0.0.wp,
@@ -52,9 +52,9 @@ class _DoingListState extends State<DoingList> {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/images/giphy.gif',
+                    'assets/images/empty.png',
                     fit: BoxFit.cover,
-                    width: 45.0.wp,
+                    width: 40.0.wp,
                   ),
                   Padding(
                     padding: EdgeInsets.only(
