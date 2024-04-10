@@ -1,12 +1,7 @@
-import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
-import 'package:taskify/app/modules/aria/widgets/chat_message.dart';
-import 'package:taskify/app/modules/aria/widgets/threedots.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
-import 'package:velocity_x/velocity_x.dart';
 
 class AriaView extends StatefulWidget {
   const AriaView({super.key});
@@ -16,110 +11,6 @@ class AriaView extends StatefulWidget {
 }
 
 class _AriaViewState extends State<AriaView> {
-  final TextEditingController _controller = TextEditingController();
-  final List<ChatMessage> _messages = [];
-  late OpenAI? chatGPT;
-  bool _isImageSearch = false;
-
-  bool _isTyping = false;
-
-  @override
-  void initState() {
-    chatGPT = OpenAI.instance.build(
-      token: dotenv.env["API_KEY"],
-      baseOption: HttpSetup(
-        receiveTimeout: const Duration(milliseconds: 6000),
-      ),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    chatGPT?.close();
-    chatGPT?.genImgClose();
-    super.dispose();
-  }
-
-  // Link for api - https://beta.openai.com/account/api-keys
-
-  void _sendMessage() async {
-    if (_controller.text.isEmpty) return;
-    ChatMessage message = ChatMessage(
-      text: _controller.text,
-      sender: "user",
-      isImage: false,
-    );
-
-    setState(() {
-      _messages.insert(0, message);
-      _isTyping = true;
-    });
-
-    _controller.clear();
-
-    if (_isImageSearch) {
-      final request = GenerateImage(message.text, 1, size: "256x256");
-
-      final response = await chatGPT!.generateImage(request);
-      Vx.log(response!.data!.last!.url!);
-      insertNewData(response.data!.last!.url!, isImage: true);
-    } else {
-      final request = CompleteText(prompt: message.text, model: kTextDavinci3);
-
-      final response = await chatGPT!.onCompletion(request: request);
-      Vx.log(response!.choices[0].text);
-      insertNewData(response.choices[0].text, isImage: false);
-    }
-  }
-
-  void insertNewData(String response, {bool isImage = false}) {
-    ChatMessage botMessage = ChatMessage(
-      text: response,
-      sender: "bot",
-      isImage: isImage,
-    );
-
-    setState(() {
-      _isTyping = false;
-      _messages.insert(0, botMessage);
-    });
-  }
-
-  Widget _buildTextComposer() {
-    return Row(
-      children: [
-        Expanded(
-          child: TextField(
-            controller: _controller,
-            onSubmitted: (value) => _sendMessage(),
-            decoration: const InputDecoration.collapsed(
-              hintText: "Question/description",
-            ),
-          ),
-        ),
-        ButtonBar(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: () {
-                _isImageSearch = false;
-                _sendMessage();
-              },
-            ),
-            TextButton(
-              onPressed: () {
-                _isImageSearch = true;
-                _sendMessage();
-              },
-              child: const Text("Generate Image"),
-            ),
-          ],
-        ),
-      ],
-    ).px16();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,29 +32,70 @@ class _AriaViewState extends State<AriaView> {
             ],
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.image_search,
+              color: Colors.orange[500],
+              size: 24.0.sp,
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: Column(
           children: [
-            Flexible(
-              child: ListView.builder(
-                reverse: true,
-                padding: Vx.m8,
-                itemCount: _messages.length,
-                itemBuilder: (context, index) {
-                  return _messages[index];
-                },
-              ),
-            ),
-            if (_isTyping) const ThreeDots(),
-            const Divider(
-              height: 1.0,
-            ),
+            Expanded(child: ListView()),
             Container(
-              decoration: BoxDecoration(
-                color: context.cardColor,
+              padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      style: GoogleFonts.poppins(
+                        color: Colors.black,
+                      ),
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: const BorderSide(
+                            color: Colors.black45,
+                          ),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(100),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                        hintText: "Enter your prompt here",
+                        hintStyle: GoogleFonts.poppins(),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.red.shade200,
+                          Colors.pinkAccent,
+                        ],
+                      ),
+                    ),
+                    child: const Icon(
+                      Icons.send,
+                      color: Colors.white,
+                    ),
+                  )
+                ],
               ),
-              child: _buildTextComposer(),
             )
           ],
         ),
