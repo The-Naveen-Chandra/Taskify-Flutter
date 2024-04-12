@@ -41,16 +41,6 @@ class _AriaViewState extends State<AriaView> {
             ],
           ),
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.image_search,
-              color: Colors.orange[500],
-              size: 24.0.sp,
-            ),
-          )
-        ],
       ),
       body: BlocConsumer<ChatBloc, ChatState>(
         bloc: chatBloc,
