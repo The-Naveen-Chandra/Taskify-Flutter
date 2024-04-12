@@ -63,59 +63,89 @@ class _AriaViewState extends State<AriaView> {
               return Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      itemCount: messages.length,
-                      itemBuilder: ((context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 6,
+                    child: messages.isEmpty
+                        ? Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  width: 80,
+                                  height: 80,
+                                  child:
+                                      Image.asset("assets/images/aria-ai.png"),
                                 ),
-                                width: 30,
-                                height: 30,
-                                decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                ),
-                                child: messages[index].role == "user"
-                                    ? const Icon(
-                                        CupertinoIcons.person,
-                                      )
-                                    : Image.asset(
-                                        "assets/images/aria-ai.png",
-                                        scale: 12,
-                                      ),
-                              ),
-                              Container(
-                                margin: const EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 16,
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 16,
-                                  horizontal: 16,
-                                ),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(16),
-                                  color: Colors.grey[200],
-                                ),
-                                child: Text(
-                                  messages[index].parts.first.text,
+                                const SizedBox(height: 28),
+                                GradientText(
+                                  "       Ask Aria anything about\npersonal tasks, work, shopping\n               or anything else!",
                                   style: GoogleFonts.poppins(
-                                    color: Colors.black,
-                                    fontSize: 12.0.sp,
+                                    fontSize: 10.0.sp,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Colors.black38,
+                                      Colors.black45,
+                                    ],
                                   ),
                                 ),
-                              ),
-                            ],
+                                const SizedBox(height: 100),
+                              ],
+                            ),
+                          )
+                        : ListView.builder(
+                            itemCount: messages.length,
+                            itemBuilder: ((context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                        vertical: 4,
+                                        horizontal: 6,
+                                      ),
+                                      width: 30,
+                                      height: 30,
+                                      decoration: const BoxDecoration(
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: messages[index].role == "user"
+                                          ? const Icon(
+                                              CupertinoIcons.person,
+                                            )
+                                          : Image.asset(
+                                              "assets/images/aria-ai.png",
+                                              scale: 12,
+                                            ),
+                                    ),
+                                    Container(
+                                      margin: const EdgeInsets.symmetric(
+                                        vertical: 4,
+                                        horizontal: 16,
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 16,
+                                        horizontal: 16,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        color: Colors.grey[200],
+                                      ),
+                                      child: Text(
+                                        messages[index].parts.first.text,
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.black,
+                                          fontSize: 12.0.sp,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }),
                           ),
-                        );
-                      }),
-                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.symmetric(
