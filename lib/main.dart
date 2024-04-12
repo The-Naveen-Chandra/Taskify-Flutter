@@ -16,6 +16,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Color(0xfafafafa),
@@ -37,7 +38,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       title: 'Taskify - An AI Powered App',
       debugShowCheckedModeBanner: false,
-      // home: const LandingView(),
       home: const LandingView(),
       initialBinding: HomeBinding(),
       builder: EasyLoading.init(),
