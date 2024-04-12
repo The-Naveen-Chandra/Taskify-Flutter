@@ -120,30 +120,19 @@ class HomePage extends GetView<HomeController> {
                         ),
 
                         // AI assistance logo
-                        ShaderMask(
-                          blendMode: BlendMode.srcIn,
-                          shaderCallback: (Rect bounds) => RadialGradient(
-                            center: Alignment.topCenter,
-                            stops: const [.5, 1],
-                            colors: [
-                              Colors.blue.shade400,
-                              Colors.blue.shade900,
-                            ],
-                          ).createShader(bounds),
-                          child: GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const AriaView(),
-                                ),
-                              );
-                            },
-                            child: Image.asset(
-                              "assets/images/rocket-lunch.png",
-                              width: 25,
-                              height: 25,
-                            ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AriaView(),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                            "assets/images/aria-ai.png",
+                            width: 30,
+                            height: 30,
                           ),
                         ),
                       ],
