@@ -1,13 +1,12 @@
-import 'package:get/get.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:taskify/app/data/models/task.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:taskify/app/core/utils/extensions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:taskify/app/core/utils/extensions.dart';
+import 'package:taskify/app/data/models/task.dart';
 import 'package:taskify/app/modules/aria/aria_view.dart';
 import 'package:taskify/app/modules/authentication/widgets/my_alert_dialog.dart';
 import 'package:taskify/app/modules/home/controller.dart';
@@ -18,7 +17,6 @@ import 'package:taskify/app/modules/home/widgets/info_cards.dart';
 import 'package:taskify/app/modules/home/widgets/info_model.dart';
 import 'package:taskify/app/modules/home/widgets/task_card.dart';
 import 'package:taskify/app/modules/home/profile/view.dart';
-import 'package:taskify/app/modules/pomodoro_timer/pomodoro_view.dart';
 
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
@@ -121,58 +119,21 @@ class HomePage extends GetView<HomeController> {
                           ],
                         ),
 
-                        // Pomodoro timer
-                        Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const PomodoroView(),
-                                  ),
-                                );
-                              },
-                              child: ShaderMask(
-                                shaderCallback: (Rect bounds) {
-                                  return LinearGradient(
-                                    begin: Alignment.topLeft,
-                                    end: Alignment.bottomRight,
-                                    colors: [
-                                      Colors.red[500]!,
-                                      Colors.orange[500]!,
-                                    ],
-                                  ).createShader(bounds);
-                                },
-                                child: const Icon(
-                                  Icons.timer_outlined,
-                                  size: 35,
-                                  color: Colors.white,
-                                ),
+                        // AI assistance logo
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const AriaView(),
                               ),
-                            ),
-
-                            const SizedBox(
-                              width: 14,
-                            ),
-
-                            // AI assistance logo
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const AriaView(),
-                                  ),
-                                );
-                              },
-                              child: Image.asset(
-                                "assets/images/aria-ai.png",
-                                width: 30,
-                                height: 30,
-                              ),
-                            ),
-                          ],
+                            );
+                          },
+                          child: Image.asset(
+                            "assets/images/aria-ai.png",
+                            width: 30,
+                            height: 30,
+                          ),
                         ),
                       ],
                     ),
@@ -321,6 +282,13 @@ class HomePage extends GetView<HomeController> {
           () => BottomNavigationBar(
             onTap: (int index) {
               controller.changeTabIndex(index);
+              // if (index == 1) {
+              //   Navigator.push(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => ProfilePage(),
+              //       ));
+              // }
             },
             currentIndex: controller.tabIndex.value,
             showSelectedLabels: false,

@@ -46,13 +46,15 @@ dependencies:
   firebase_core: ^2.14.0
   firebase_auth: ^4.6.3
   cloud_firestore: ^4.8.2
+  chat_gpt_sdk:
+    git:
+      url: https://github.com/iampawan/Flutter-ChatGPT.git
   velocity_x: ^4.1.0
   flutter_dotenv:
   bloc:
   flutter_bloc:
   dio:
   lottie:
-  provider:
 
 dev_dependencies:
   flutter_test:
