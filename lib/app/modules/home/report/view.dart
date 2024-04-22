@@ -81,9 +81,9 @@ class ReportPage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      _buildStatus(Colors.orange, createdTasks, 'Created'),
                       _buildStatus(Colors.green, liveTasks, 'Live Tasks'),
-                      _buildStatus(Colors.orange, completedTasks, 'Completed'),
-                      _buildStatus(Colors.blue, createdTasks, 'Created'),
+                      _buildStatus(Colors.blue, completedTasks, 'Completed'),
                     ],
                   ),
                 ),
@@ -182,7 +182,7 @@ class ReportPage extends StatelessWidget {
 
   Container _buildStatus(Color color, int number, String text) {
     return Container(
-      height:26.0.wp,
+      height: 26.0.wp,
       width: 26.0.wp,
       padding: EdgeInsets.symmetric(vertical: 4.0.wp, horizontal: 1.0.wp),
       decoration: BoxDecoration(
