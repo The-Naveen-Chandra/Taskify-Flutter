@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:taskify/app/core/utils/extensions.dart';
+import 'package:taskify/app/modules/pomodoro_timer/components/time_options.dart';
 
 class PomodoroSettings extends StatelessWidget {
   const PomodoroSettings({super.key});
@@ -8,26 +11,21 @@ class PomodoroSettings extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new),
-          color: Colors.red[500]!,
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
-        title: const Text(
-          "Pomodoro Settings",
-          style: TextStyle(
-            fontSize: 16.0,
+        title: Text(
+          "Settings",
+          style: GoogleFonts.poppins(
+            fontSize: 14.0.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          alignment: Alignment.center,
-          child: const Column(
-            children: [],
-          ),
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            TimeOptions(),
+          ],
         ),
       ),
     );
