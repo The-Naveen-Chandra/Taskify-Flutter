@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:taskify/app/core/utils/extensions.dart';
 
 class PomodoroStats extends StatelessWidget {
   const PomodoroStats({super.key});
@@ -8,16 +10,12 @@ class PomodoroStats extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new),
-          color: Colors.red[500]!,
-          onPressed: () => Navigator.pop(context),
-        ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
-          "Pomodoro Stats",
-          style: TextStyle(
-            fontSize: 16.0,
+          "Statistics",
+          style: GoogleFonts.poppins(
+            fontSize: 14.0.sp,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -25,7 +23,7 @@ class PomodoroStats extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          child: Column(
+          child: const Column(
             children: [],
           ),
         ),

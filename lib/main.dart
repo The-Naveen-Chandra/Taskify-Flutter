@@ -2,12 +2,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:provider/provider.dart';
 import 'package:taskify/app/data/services/storage/services.dart';
 import 'package:taskify/app/modules/home/binding.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:taskify/app/modules/landing/landing_view.dart';
+import 'package:taskify/app/modules/pomodoro_timer/components/timer_service.dart';
 import 'package:taskify/firebase_options.dart';
 
 void main() async {
@@ -25,7 +27,12 @@ void main() async {
   );
   await GetStorage.init();
   await Get.putAsync(() => StorageService().init());
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider<TimerService>(
+      create: (_) => TimerService(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

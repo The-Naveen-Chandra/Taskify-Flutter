@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:step_progress_indicator/step_progress_indicator.dart';
 
 import 'package:taskify/app/core/utils/extensions.dart';
-import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/time_controller.dart';
-import 'package:taskify/app/modules/pomodoro_timer/components/time_options.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/timer_card.dart';
+import 'package:taskify/app/modules/pomodoro_timer/components/timer_service.dart';
 
 class PomodoroTimer extends StatelessWidget {
   const PomodoroTimer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<TimerService>(context);
+    final seconds = provider.currentDuration % 60;
+    String focus = "Time to focus!";
+    String longBreak = "Time to long break!";
+
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
@@ -21,53 +26,101 @@ class PomodoroTimer extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
         centerTitle: true,
-        title: GradientText(
-          "Pomodoro Timer",
+        title: Text(
+          "Pomodoro",
           style: GoogleFonts.poppins(
-              fontSize: 16.0.sp, fontWeight: FontWeight.w600),
-          gradient: LinearGradient(
-            colors: [
-              Colors.red[500]!,
-              Colors.orange[500]!,
-            ],
+            fontSize: 14.0.sp,
+            fontWeight: FontWeight.w600,
           ),
         ),
-        actions: [
-          // reset timer button
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.refresh_rounded,
-              size: 30,
-            ),
-          ),
-        ],
       ),
       body: SingleChildScrollView(
         child: Container(
           alignment: Alignment.center,
-          child: const Column(
+          child: Column(
             children: [
-              SizedBox(
-                height: 15,
+              const SizedBox(
+                height: 25,
               ),
 
-              // timer card
-              TimerCard(),
+              const TimerCard(),
 
-              SizedBox(
-                height: 30,
+              Container(
+                width: 80.0.wp,
+                height: 80.0.wp,
+                padding: EdgeInsets.all(10.0.wp),
+                child: CircularStepProgressIndicator(
+                  totalSteps: provider.selectedTime.toInt(),
+                  currentStep: provider.currentDuration.toInt(),
+                  stepSize: 6,
+                  selectedStepSize: 12,
+                  selectedColor: provider.currentState == focus
+                      ? Colors.red
+                      : provider.currentState == longBreak
+                          ? Colors.blue
+                          : Colors.green,
+                  unselectedColor: provider.currentState == focus
+                      ? Colors.red[100]
+                      : provider.currentState == longBreak
+                          ? Colors.blue[100]
+                          : Colors.green[100],
+                  padding: 0,
+                  width: 150,
+                  height: 150,
+                  roundedCap: (_, __) => true,
+                  circularDirection: CircularDirection.counterclockwise,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        (provider.currentDuration ~/ 60).toString(),
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 34.0.sp,
+                        ),
+                      ),
+                      Text(
+                        " : ",
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 34.0.sp,
+                        ),
+                      ),
+                      Text(
+                        seconds == 0
+                            ? "${seconds.round()}0"
+                            : (seconds).round().toString(),
+                        style: GoogleFonts.poppins(
+                          fontWeight: FontWeight.w400,
+                          fontSize: 34.0.sp,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ),
 
-              // time options
-              TimeOptions(),
+              const SizedBox(
+                height: 10,
+              ),
 
-              SizedBox(
-                height: 40,
+              Text(
+                provider.currentState == focus
+                    ? "Stay focused for ${provider.selectedTime ~/ 60} minutes"
+                    : "",
+                style: GoogleFonts.poppins(
+                  fontSize: 10.0.sp,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.grey[700],
+                ),
+              ),
+
+              const SizedBox(
+                height: 100,
               ),
 
               // time controller
-              TimeController(),
+              const TimeController(),
             ],
           ),
         ),
