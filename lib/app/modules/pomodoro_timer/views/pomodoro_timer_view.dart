@@ -73,7 +73,9 @@ class PomodoroTimer extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        (provider.currentDuration ~/ 60).toString(),
+                        (provider.currentDuration ~/ 60)
+                            .toString()
+                            .padLeft(2, '0'),
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 34.0.sp,
@@ -89,7 +91,7 @@ class PomodoroTimer extends StatelessWidget {
                       Text(
                         seconds == 0
                             ? "${seconds.round()}0"
-                            : (seconds).round().toString(),
+                            : (seconds).round().toString().padLeft(2, '0'),
                         style: GoogleFonts.poppins(
                           fontWeight: FontWeight.w400,
                           fontSize: 34.0.sp,
