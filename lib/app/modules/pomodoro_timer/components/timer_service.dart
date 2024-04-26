@@ -6,7 +6,11 @@ class TimerService extends ChangeNotifier {
   late Timer timer;
   double currentDuration = 1500;
   double selectedTime = 1500;
+  double shortBreak = 300;
+  double longBreak = 900;
   bool timerPlaying = false;
+  int initialRounds = 4;
+  int initialGoal = 12;
   int rounds = 0;
   int goal = 0;
   String currentState = "Time to focus!";
@@ -48,24 +52,24 @@ class TimerService extends ChangeNotifier {
   void handleNextRound() {
     if (currentState == "Time to focus!" && rounds != 3) {
       currentState = "Time to break!";
-      currentDuration = 300;
-      selectedTime = 300;
+      currentDuration = shortBreak;
+      selectedTime = shortBreak;
       rounds++;
       goal++;
     } else if (currentState == "Time to break!") {
       currentState = "Time to focus!";
-      currentDuration = 1500;
-      selectedTime = 1500;
+      currentDuration = selectedTime;
+      selectedTime = selectedTime;
     } else if (currentState == "Time to focus!" && rounds == 3) {
       currentState = "Time to long break!";
-      currentDuration = 900;
-      selectedTime = 900;
+      currentDuration = longBreak;
+      selectedTime = longBreak;
       rounds++;
       goal++;
     } else if (currentState == "Time to long break!") {
       currentState = "Time to focus!";
-      currentDuration = 1500;
-      selectedTime = 1500;
+      currentDuration = selectedTime;
+      selectedTime = selectedTime;
       rounds = 0;
     }
     notifyListeners();
