@@ -33,10 +33,30 @@ class TimerService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selectTime(double seconds) {
+  void setSelectTime(double seconds) {
     selectedTime = seconds;
     currentDuration = seconds;
 
+    notifyListeners();
+  }
+
+  void setShortBreak(double seconds) {
+    shortBreak = seconds;
+    notifyListeners();
+  }
+
+  void setLongBreak(double seconds) {
+    longBreak = seconds;
+    notifyListeners();
+  }
+
+  void setInitialRounds(int rounds) {
+    initialRounds = rounds;
+    notifyListeners();
+  }
+
+  void setInitialGoal(int goal) {
+    initialGoal = goal;
     notifyListeners();
   }
 
@@ -50,7 +70,7 @@ class TimerService extends ChangeNotifier {
   }
 
   void handleNextRound() {
-    if (currentState == "Time to focus!" && rounds != 3) {
+    if (currentState == "Time to focus!" && rounds != initialRounds - 1) {
       currentState = "Time to break!";
       currentDuration = shortBreak;
       selectedTime = shortBreak;
@@ -60,7 +80,8 @@ class TimerService extends ChangeNotifier {
       currentState = "Time to focus!";
       currentDuration = selectedTime;
       selectedTime = selectedTime;
-    } else if (currentState == "Time to focus!" && rounds == 3) {
+    } else if (currentState == "Time to focus!" &&
+        rounds == initialRounds - 1) {
       currentState = "Time to long break!";
       currentDuration = longBreak;
       selectedTime = longBreak;

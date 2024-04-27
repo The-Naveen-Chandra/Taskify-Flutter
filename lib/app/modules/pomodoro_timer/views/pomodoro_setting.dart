@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/timer_service.dart';
+import 'package:taskify/app/modules/pomodoro_timer/components/timer_setting.dart';
 
 class PomodoroSettings extends StatelessWidget {
   const PomodoroSettings({super.key});
@@ -92,41 +93,78 @@ class PomodoroSettings extends StatelessWidget {
 }
 
 void _showDurationDialog(BuildContext context, String title) async {
-  TimerService timerService = Provider.of<TimerService>(context, listen: false);
+  final provider = Provider.of<TimerService>(context, listen: false);
 
   String? newValue = await showDialog<String>(
     context: context,
     builder: (BuildContext dialogContext) {
-      String currentValue = timerService.selectedTime.toString();
+      return Consumer<TimerService>(
+        builder: (context, value, child) {
+          String currentValue = "";
+          String focus = "Focus duration";
+          String shortBreak = "Short break duration";
+          String longBreak = "Long break duration";
+          String dailyRounds = "Daily rounds";
+          String dailyGoal = "Daily goal";
 
-      return AlertDialog(
-        title: Text(title),
-        content: TextField(
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-            hintText: "Enter duration in minutes",
-          ),
-          onChanged: (value) {
-            currentValue = value;
-          },
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(dialogContext);
-            },
-            child: const Text('Cancel'),
-          ),
-          TextButton(
-            onPressed: () {
-              if (double.tryParse(currentValue) != null) {
-                timerService.selectTime(double.parse(currentValue) * 60);
-              }
-              Navigator.pop(dialogContext, currentValue);
-            },
-            child: const Text('Save'),
-          ),
-        ],
+          return AlertDialog(
+            title: Text(
+              title,
+              style: GoogleFonts.poppins(),
+            ),
+            content: TextField(
+              keyboardType: TextInputType.number,
+              decoration: InputDecoration(
+                hintText: "Enter duration",
+                hintStyle: GoogleFonts.poppins(
+                  fontSize: 12.0,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              onChanged: (value) {
+                currentValue = value;
+              },
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(dialogContext);
+                },
+                child: Text(
+                  'Cancel',
+                  style: GoogleFonts.poppins(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  if (currentValue.isEmpty) {
+                    return;
+                  }
+
+                  if (title == focus) {
+                    provider.setSelectTime(double.parse(currentValue) * 60);
+                  } else if (title == shortBreak) {
+                    provider.setShortBreak(double.parse(currentValue) * 60);
+                  } else if (title == longBreak) {
+                    provider.setLongBreak(double.parse(currentValue) * 60);
+                  } else if (title == dailyRounds) {
+                    provider.setInitialRounds(int.parse(currentValue));
+                  } else if (title == dailyGoal) {
+                    provider.setInitialGoal(int.parse(currentValue));
+                  }
+
+                  Navigator.pop(dialogContext, currentValue);
+                },
+                child: Text(
+                  'Save',
+                  style: GoogleFonts.poppins(),
+                ),
+              ),
+            ],
+          );
+        },
       );
     },
   );
@@ -134,76 +172,5 @@ void _showDurationDialog(BuildContext context, String title) async {
   if (newValue != null) {
     print("New value for $title: $newValue min");
     // Update the state or perform necessary actions with the new value
-  }
-}
-
-class SettingContainer extends StatefulWidget {
-  final String title;
-  final String initialValue;
-  final void Function()? onTap;
-  final bool isInt;
-
-  const SettingContainer({
-    Key? key,
-    required this.title,
-    required this.initialValue,
-    required this.onTap,
-    this.isInt = false,
-  }) : super(key: key);
-
-  @override
-  State<SettingContainer> createState() => _SettingContainerState();
-}
-
-class _SettingContainerState extends State<SettingContainer> {
-  @override
-  Widget build(BuildContext context) {
-    TimerService timerService = Provider.of<TimerService>(context);
-
-    String currentValue = widget.initialValue;
-
-    if (widget.title == "Focus duration") {
-      currentValue =
-          (timerService.selectedTime ~/ 60).toString().padLeft(2, '0');
-    } else if (widget.title == "Short break duration") {
-      currentValue = (timerService.shortBreak ~/ 60).toString();
-    } else if (widget.title == "Long break duration") {
-      currentValue = (timerService.longBreak ~/ 60).toString();
-    } else if (widget.title == "Daily rounds") {
-      currentValue = "${timerService.initialRounds} rounds";
-    } else if (widget.title == "Daily goal") {
-      currentValue = "${timerService.initialGoal} sessions";
-    }
-
-    return GestureDetector(
-      onTap: widget.onTap,
-      child: Container(
-        margin: EdgeInsets.symmetric(vertical: 4.0.sp, horizontal: 12.0.sp),
-        padding: EdgeInsets.all(18.0.sp),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.grey[300],
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              widget.title,
-              style: GoogleFonts.poppins(
-                fontSize: 12.0.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            Text(
-              widget.isInt ? currentValue : "$currentValue min",
-              style: GoogleFonts.poppins(
-                fontSize: 12.0.sp,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

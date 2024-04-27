@@ -17,6 +17,8 @@ class PomodoroTimer extends StatelessWidget {
     final seconds = provider.currentDuration % 60;
     String focus = "Time to focus!";
     String longBreak = "Time to long break!";
+    final String completedRounds = provider.rounds.toString();
+    final String totalRounds = provider.initialRounds.toString();
 
     return Scaffold(
       appBar: AppBar(
@@ -69,32 +71,45 @@ class PomodoroTimer extends StatelessWidget {
                   height: 150,
                   roundedCap: (_, __) => true,
                   circularDirection: CircularDirection.counterclockwise,
-                  child: Row(
+                  child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        (provider.currentDuration ~/ 60)
-                            .toString()
-                            .padLeft(2, '0'),
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 34.0.sp,
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            (provider.currentDuration ~/ 60)
+                                .toString()
+                                .padLeft(2, '0'),
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 34.0.sp,
+                            ),
+                          ),
+                          Text(
+                            " : ",
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 34.0.sp,
+                            ),
+                          ),
+                          Text(
+                            seconds == 0
+                                ? "${seconds.round()}0"
+                                : (seconds).round().toString().padLeft(2, '0'),
+                            style: GoogleFonts.poppins(
+                              fontWeight: FontWeight.w400,
+                              fontSize: 34.0.sp,
+                            ),
+                          ),
+                        ],
                       ),
                       Text(
-                        " : ",
+                        "$completedRounds of $totalRounds sessions",
                         style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 34.0.sp,
-                        ),
-                      ),
-                      Text(
-                        seconds == 0
-                            ? "${seconds.round()}0"
-                            : (seconds).round().toString().padLeft(2, '0'),
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w400,
-                          fontSize: 34.0.sp,
+                          fontSize: 10.0.sp,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[700],
                         ),
                       ),
                     ],
@@ -108,8 +123,10 @@ class PomodoroTimer extends StatelessWidget {
 
               Text(
                 provider.currentState == focus
-                    ? "Stay focused for ${provider.selectedTime ~/ 60} minutes"
-                    : "",
+                    ? "Stay focused for ${provider.selectedTime ~/ 60} minutes."
+                    : provider.currentState == longBreak
+                        ? "Take a long break for ${provider.longBreak ~/ 60} minutes."
+                        : "Take a short break for ${provider.shortBreak ~/ 60} minutes.",
                 style: GoogleFonts.poppins(
                   fontSize: 10.0.sp,
                   fontWeight: FontWeight.w600,
