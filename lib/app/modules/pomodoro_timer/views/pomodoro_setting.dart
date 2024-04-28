@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -48,28 +47,31 @@ class PomodoroSettings extends StatelessWidget {
                   title: "Focus duration",
                   initialValue: provider.selectedTime.toString(),
                   onTap: () {
-                    _showDurationDialog(context, "Focus duration");
+                    _showDurationDialog(
+                        context, "Focus duration", false, false);
                   },
                 ),
                 SettingContainer(
                   title: "Short break duration",
                   initialValue: provider.shortBreak.toString(),
                   onTap: () {
-                    _showDurationDialog(context, "Short break duration");
+                    _showDurationDialog(
+                        context, "Short break duration", false, false);
                   },
                 ),
                 SettingContainer(
                   title: "Long break duration",
                   initialValue: provider.longBreak.toString(),
                   onTap: () {
-                    _showDurationDialog(context, "Long break duration");
+                    _showDurationDialog(
+                        context, "Long break duration", false, false);
                   },
                 ),
                 SettingContainer(
                   title: "Daily rounds",
                   initialValue: provider.initialRounds.toString(),
                   onTap: () {
-                    _showDurationDialog(context, "Daily rounds");
+                    _showDurationDialog(context, "Daily rounds", true, false);
                   },
                   isInt: true,
                 ),
@@ -77,12 +79,10 @@ class PomodoroSettings extends StatelessWidget {
                   title: "Daily goal",
                   initialValue: provider.initialGoal.toString(),
                   onTap: () {
-                    _showDurationDialog(context, "Daily goal");
+                    _showDurationDialog(context, "Daily goal", false, true);
                   },
                   isInt: true,
                 ),
-
-                // TimeOptions(),
               ],
             ),
           ],
@@ -92,7 +92,8 @@ class PomodoroSettings extends StatelessWidget {
   }
 }
 
-void _showDurationDialog(BuildContext context, String title) async {
+void _showDurationDialog(
+    BuildContext context, String title, bool isRound, bool isGoal) async {
   final provider = Provider.of<TimerService>(context, listen: false);
 
   String? newValue = await showDialog<String>(
@@ -113,11 +114,17 @@ void _showDurationDialog(BuildContext context, String title) async {
               style: GoogleFonts.poppins(),
             ),
             content: TextField(
+              autofocus: true,
               keyboardType: TextInputType.number,
               decoration: InputDecoration(
-                hintText: "Enter duration",
+                border: InputBorder.none,
+                hintText: isRound
+                    ? "Enter rounds"
+                    : isGoal
+                        ? "Enter goals"
+                        : "Enter duration",
                 hintStyle: GoogleFonts.poppins(
-                  fontSize: 12.0,
+                  fontSize: 12.0.sp,
                   fontWeight: FontWeight.w500,
                 ),
               ),

@@ -31,14 +31,13 @@ class _SettingContainerState extends State<SettingContainer> {
     String currentValue = widget.initialValue;
 
     if (widget.title == "Focus duration") {
-      currentValue =
-          (timerService.selectedTime ~/ 60).toString().padLeft(2, '0');
+      currentValue = (timerService.selectedTime ~/ 60).toString();
     } else if (widget.title == "Short break duration") {
       currentValue = (timerService.shortBreak ~/ 60).toString();
     } else if (widget.title == "Long break duration") {
       currentValue = (timerService.longBreak ~/ 60).toString();
     } else if (widget.title == "Daily rounds") {
-      currentValue = "${timerService.initialRounds} sessions";
+      currentValue = "${timerService.initialRounds} rounds";
     } else if (widget.title == "Daily goal") {
       currentValue = "${timerService.initialGoal} goals";
     }

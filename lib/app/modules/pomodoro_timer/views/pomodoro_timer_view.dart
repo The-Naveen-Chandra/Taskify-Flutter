@@ -105,7 +105,7 @@ class PomodoroTimer extends StatelessWidget {
                         ],
                       ),
                       Text(
-                        "$completedRounds of $totalRounds sessions",
+                        "$completedRounds of $totalRounds rounds",
                         style: GoogleFonts.poppins(
                           fontSize: 10.0.sp,
                           fontWeight: FontWeight.w500,
