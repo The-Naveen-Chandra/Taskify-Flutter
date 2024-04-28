@@ -35,6 +35,14 @@ class PomodoroTimer extends StatelessWidget {
             fontWeight: FontWeight.w600,
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.refresh_rounded),
+            iconSize: 24.0.sp,
+            onPressed: () =>
+                Provider.of<TimerService>(context, listen: false).reset(),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
