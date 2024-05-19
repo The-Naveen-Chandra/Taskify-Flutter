@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/modules/aria/aria_view.dart';
 import 'package:taskify/app/modules/home/widgets/gradient_text.dart';
+import 'package:taskify/app/modules/pomodoro_timer/views/pomodoro_timer_view.dart';
 
 // ignore: must_be_immutable
 class InfoCards extends StatelessWidget {
@@ -17,6 +18,7 @@ class InfoCards extends StatelessWidget {
   final bool gradient;
   final bool isGradientRainbow;
   final bool isIcon;
+  final bool onTapPomodoro;
   void Function()? onTap;
   InfoCards({
     super.key,
@@ -32,6 +34,7 @@ class InfoCards extends StatelessWidget {
     required this.isGradientRainbow,
     required this.onTap,
     required this.isIcon,
+    required this.onTapPomodoro,
   });
 
   @override
@@ -120,12 +123,16 @@ class InfoCards extends StatelessWidget {
                                   ],
                                 ),
                               )
-                            : Text(
+                            : GradientText(
                                 title,
                                 style: GoogleFonts.poppins(
-                                  color: titleColor,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 18.0.sp,
+                                    fontSize: 18.0.sp,
+                                    fontWeight: FontWeight.w600),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Colors.red,
+                                    Colors.orange,
+                                  ],
                                 ),
                               ),
                     const SizedBox(
@@ -146,33 +153,40 @@ class InfoCards extends StatelessWidget {
           Positioned(
             bottom: 20,
             right: 20,
-            child: GestureDetector(
-              onTap: onTap,
-              child: Container(
-                padding: const EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                  color: iconBottomColor,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: isIcon
-                    ? Icon(
+            child: Container(
+              padding: const EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                color: iconBottomColor,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              child: isIcon
+                  ? GestureDetector(
+                      onTap: onTapPomodoro
+                          ? () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const PomodoroTimer(),
+                                ),
+                              )
+                          : () {},
+                      child: Icon(
                         iconBottom,
                         color: Colors.white,
-                      )
-                    : GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AriaView(),
-                          ),
-                        ),
-                        child: Image.asset(
-                          "assets/images/aria-ai.png",
-                          width: 30,
-                          height: 30,
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AriaView(),
                         ),
                       ),
-              ),
+                      child: Image.asset(
+                        "assets/images/aria-ai.png",
+                        width: 30,
+                        height: 30,
+                      ),
+                    ),
             ),
           ),
         ],
