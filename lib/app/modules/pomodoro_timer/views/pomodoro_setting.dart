@@ -14,7 +14,6 @@ class PomodoroSettings extends StatelessWidget {
     final provider = Provider.of<TimerService>(context);
 
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,

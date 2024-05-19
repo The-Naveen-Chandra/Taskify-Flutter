@@ -199,6 +199,7 @@ class HomePage extends GetView<HomeController> {
                         icon: infoCardsData[index].icon,
                         iconBottom: infoCardsData[index].iconBottom,
                         onTap: infoCardsData[index].onTap,
+                        onTapPomodoro: infoCardsData[index].onTapPomodoro,
                       ),
                     ),
                   ),
