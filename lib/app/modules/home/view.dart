@@ -23,29 +23,9 @@ import 'package:taskify/app/modules/pomodoro_timer/pomodoro_view.dart';
 class HomePage extends GetView<HomeController> {
   const HomePage({super.key});
 
-  // final PageController pageController = PageController();
-  // int currentPage = 0;
-
   @override
   Widget build(BuildContext context) {
-    // Timer.periodic(const Duration(seconds: 3), (_) {
-    //   if (currentPage < 2) {
-    //     currentPage++;
-    //   } else {
-    //     currentPage = 0;
-    //   }
-    //   pageController.animateToPage(
-    //     currentPage,
-    //     duration: const Duration(milliseconds: 500),
-    //     curve: Curves.ease,
-    //   );
-    // });
-
-    // current user
     final currentUser = FirebaseAuth.instance.currentUser!;
-
-    // // all the users
-    // final userCollection = FirebaseFirestore.instance.collection("Users");
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -78,14 +58,6 @@ class HomePage extends GetView<HomeController> {
                             SizedBox(
                               width: 2.0.wp,
                             ),
-                            // Text(
-                            //   "Hi, Xo !",
-                            //   style: GoogleFonts.poppins(
-                            //     fontSize: 22,
-                            //     fontWeight: FontWeight.w500,
-                            //     color: Colors.black,
-                            //   ),
-                            // ),
                             StreamBuilder<DocumentSnapshot>(
                               stream: FirebaseFirestore.instance
                                   .collection("Users")
@@ -180,10 +152,6 @@ class HomePage extends GetView<HomeController> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height / 5.2,
                     child: PageView.builder(
-                      // controller: pageController,
-                      // onPageChanged: (int index) {
-                      //   currentPage = 0;
-                      // },
                       scrollDirection: Axis.horizontal,
                       itemCount: 3,
                       itemBuilder: (context, index) => InfoCards(
@@ -307,8 +275,8 @@ class HomePage extends GetView<HomeController> {
             ),
           );
         },
-        onAccept: (Task task) {
-          controller.deleteTask(task);
+        onAcceptWithDetails: (DragTargetDetails<Task> details) {
+          controller.deleteTask(details.data);
           EasyLoading.showSuccess("Delete Success");
         },
       ),

@@ -10,5 +10,6 @@
         "taskify",
         "todos"
     ],
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

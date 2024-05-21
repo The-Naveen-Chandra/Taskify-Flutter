@@ -10,6 +10,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:taskify/app/modules/landing/landing_view.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/timer_service.dart';
+import 'package:taskify/app/services/notification_services.dart';
 import 'package:taskify/firebase_options.dart';
 
 void main() async {
@@ -18,6 +19,8 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  await LocalNotification.init();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
