@@ -2,11 +2,14 @@
 
 Below down we have attached Screenshot of our application :-
 
-![2](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/64361663-a782-45b8-aabc-1f7b69e7a941)
-![1](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/b211c1bc-2c0b-47d8-a741-1d404485b2e0)
-![5](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/1656fde5-cbfb-4b1c-ba4f-6ce5f13c5c90)
-![4](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/8b087339-251a-46b6-9fbd-a5acb3215467)
-![3](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/a28e9527-e156-4ea3-ade9-a05e56387795)
+
+![91e279616ca1c3fcb15be53f8f22b76e-0](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/20ddf615-7619-41cb-aef5-12f8e239c893)
+![91e279616ca1c3fcb15be53f8f22b76e-1](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/8cfdbccb-67f5-4997-a6c8-5e069a6afbd5)
+![91e279616ca1c3fcb15be53f8f22b76e-2](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/c79e037d-cbf3-4280-b50b-a3cf745e7d79)
+![91e279616ca1c3fcb15be53f8f22b76e-3](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/017b9a15-8a4d-4999-9669-eefac47e3550)
+![91e279616ca1c3fcb15be53f8f22b76e-4](https://github.com/vinaysahu16/Taskify-Flutter/assets/74305356/efd51b5d-9159-41e0-aada-9237f876d918)
+
+
 
 # ABSTRACT
 This research is a usability study of an Al powered app to boost student and professional task performance that are available on smart phones and tablets.
