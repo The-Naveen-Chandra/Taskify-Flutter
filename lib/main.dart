@@ -45,7 +45,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.white,
+        ),
+      ),
       title: 'Taskify - An AI Powered App',
       debugShowCheckedModeBanner: false,
       home: const LandingView(),
