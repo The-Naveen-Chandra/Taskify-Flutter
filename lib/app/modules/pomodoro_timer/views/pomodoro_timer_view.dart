@@ -7,9 +7,26 @@ import 'package:taskify/app/core/utils/extensions.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/time_controller.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/timer_card.dart';
 import 'package:taskify/app/modules/pomodoro_timer/components/timer_service.dart';
+import 'package:taskify/app/services/notification_services.dart';
+// import 'package:taskify/app/services/notification_services.dart';
 
-class PomodoroTimer extends StatelessWidget {
+class PomodoroTimer extends StatefulWidget {
   const PomodoroTimer({super.key});
+
+  @override
+  State<PomodoroTimer> createState() => _PomodoroTimerState();
+}
+
+class _PomodoroTimerState extends State<PomodoroTimer> {
+  // var notifyHelper;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   notifyHelper = NotifyHelper();
+  //   notifyHelper.initializeNotification();
+  //   notifyHelper.requestIOSPermissions();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +53,23 @@ class PomodoroTimer extends StatelessWidget {
           ),
         ),
         actions: [
+          IconButton(
+            onPressed: () {
+              // LocalNotification.showSimpleNotification(
+              //   title: "Taskify",
+              //   body: "Hello",
+              //   payload: "Hi there",
+              // );
+
+              LocalNotification.showPeriodicNotifications(
+                title: "Taskify",
+                body: "Periodic Notification",
+              );
+            },
+            icon: const Icon(
+              Icons.notifications,
+            ),
+          ),
           IconButton(
             icon: const Icon(Icons.refresh_rounded),
             iconSize: 24.0.sp,
